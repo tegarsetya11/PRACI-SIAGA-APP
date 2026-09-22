@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0284C7" />
+    <meta
+      name="description"
+      content="PRACI SIAGA - Informasi dan Akses Cepat Layanan Darurat Terintegrasi Kecamatan Pracimantoro, Kabupaten Wonogiri. Hubungi Polsek, Damkar, Ambulans, BPBD, SAR, DISHUB, dan PMI dalam satu klik."
+    />
+    <meta name="keywords" content="darurat, pracimantoro, wonogiri, polisi, damkar, ambulans, bpbd, sar, pmi, layanan darurat" />
+    <meta name="author" content="Pemerintah Kecamatan Pracimantoro" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="PRACI SIAGA - Layanan Darurat Terintegrasi" />
+    <meta property="og:description" content="Akses cepat nomor darurat Pracimantoro & Wonogiri dalam satu aplikasi." />
+    <meta property="og:type" content="website" />
+
+    <title>PRACI SIAGA - Layanan Darurat Terintegrasi Pracimantoro</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.svg" />
+
+    <!-- Leaflet CSS & JS for Interactive Map Picker -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- ===================== LAYAR 1: WELCOME SCREEN ===================== -->
+    <div id="welcome-screen" class="welcome-screen" role="main" aria-label="Halaman Sambutan PRACI SIAGA">
+
+      <!-- Dekorasi latar -->
+      <div class="welcome-bg-circle welcome-bg-circle--1" aria-hidden="true"></div>
+      <div class="welcome-bg-circle welcome-bg-circle--2" aria-hidden="true"></div>
+      <div class="welcome-bg-circle welcome-bg-circle--3" aria-hidden="true"></div>
+
+      <div class="welcome-content">
+
+        <!-- Logo -->
+        <div class="welcome-logo-wrap" aria-hidden="true">
+          <div class="welcome-logo-ring">
+            <img src="assets/logo.jpg" alt="Logo PRACI SIAGA" class="welcome-logo-img" />
+          </div>
+        </div>
+
+        <!-- Sambutan -->
+        <div class="welcome-text">
+          <p class="welcome-greeting">Selamat Datang di</p>
+          <h1 class="welcome-title">PRACI SIAGA</h1>
+          <p class="welcome-subtitle">
+            Informasi &amp; Akses Cepat Layanan Darurat Terintegrasi<br/>
+            <span class="welcome-location">Kecamatan Pracimantoro · Wonogiri</span>
+          </p>
+        </div>
+
+        <!-- Status aktif -->
+        <div class="welcome-status" aria-label="Status layanan aktif 24 jam">
+          <span class="status-dot" aria-hidden="true"></span>
+          Layanan Aktif 24 Jam Non-Stop
+        </div>
+
+        <!-- Pilihan Menu -->
+        <div class="welcome-menu" role="navigation" aria-label="Menu utama aplikasi">
+          <p class="welcome-menu-label">Pilih menu yang Anda butuhkan:</p>
+
+          <button
+            class="welcome-btn welcome-btn--primary"
+            id="btn-telepon-darurat"
+            onclick="navigateToApp('telepon')"
+            aria-label="Buka daftar nomor telepon darurat"
+          >
+            <span class="welcome-btn-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </span>
+            <span class="welcome-btn-text">
+              <span class="welcome-btn-label">NOMOR TELEPON DARURAT</span>
+              <span class="welcome-btn-sub">Hubungi Polisi, Damkar, Ambulans &amp; lainnya</span>
+            </span>
+            <span class="welcome-btn-arrow" aria-hidden="true">›</span>
+          </button>
+
+          <button
+            class="welcome-btn welcome-btn--secondary"
+            id="btn-informasi-penting"
+            onclick="navigateToApp('informasi')"
+            aria-label="Buka panduan dan informasi penting"
+          >
+            <span class="welcome-btn-icon welcome-btn-icon--info" aria-hidden="true">
+              <!-- Ikon lingkaran biru dengan huruf i -->
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="18" cy="18" r="17" fill="#4A90D9" stroke="white" stroke-width="2"/>
+                <circle cx="18" cy="11" r="2.5" fill="white"/>
+                <rect x="15.5" y="15.5" width="5" height="12" rx="2.5" fill="white"/>
+              </svg>
+            </span>
+            <span class="welcome-btn-text">
+              <span class="welcome-btn-label">INFORMASI PENTING</span>
+              <span class="welcome-btn-sub">Panduan P3K &amp; informasi kedaruratan</span>
+            </span>
+            <span class="welcome-btn-arrow" aria-hidden="true">›</span>
+          </button>
+        </div>
+
+        <!-- Footer kecil -->
+        <p class="welcome-footer-note">© 2026 PRACI SIAGA · Hak Cipta Dilindungi · TEGAR.S.A</p>
+      </div>
+    </div>
+
+    <!-- ===================== LAYAR 2A: TELEPON DARURAT ===================== -->
+    <div id="screen-telepon" class="main-app hidden" role="application" aria-label="Nomor Telepon Darurat">
+
+      <!-- NAVBAR dengan 3 TAB -->
+      <header class="navbar" role="banner">
+        <nav class="container navbar-inner">
+          <a class="navbar-brand" href="#" onclick="backToWelcome(); return false;" aria-label="PRACI SIAGA - Kembali">
+            <div class="navbar-logo" aria-hidden="true">
+              <img src="assets/logo.jpg" alt="Logo PRACI SIAGA" class="navbar-logo-img" />
+            </div>
+            <div class="navbar-title">PRACI SIAGA</div>
+          </a>
+          <!-- 2 TAB NAVIGASI -->
+          <div class="navbar-tabs" role="navigation" aria-label="Menu navigasi">
+            <button class="nav-tab" id="tab-beranda" onclick="backToWelcome()" aria-label="Kembali ke Beranda">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Beranda
+            </button>
+            <button class="nav-tab" id="tab-informasi" onclick="goToInformasi()" aria-label="Buka halaman Informasi Penting">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Informasi
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <!-- HERO Telepon -->
+      <section class="hero" aria-label="Layanan Darurat Pracimantoro">
+        <div class="hero-pattern" aria-hidden="true"></div>
+        <div class="hero-content">
+
+          <!-- Badge atas -->
+          <div class="hero-badge-wrap">
+            <div class="hero-badge">
+              <span>🟢</span> Layanan Aktif 24 Jam
+            </div>
+          </div>
+
+          <!-- BANNER SLIDER -->
+          <div class="banner-slider" id="banner-slider" aria-label="Galeri Instansi Darurat" role="region">
+            <div class="banner-track" id="banner-track">
+              <div class="banner-slide"><img src="assets/banners/banner-1.png" alt="Puskesmas Pracimantoro" loading="eager" /></div>
+              <div class="banner-slide"><img src="assets/banners/banner-2.jpg" alt="Damkar Wonogiri" loading="lazy" /></div>
+              <div class="banner-slide"><img src="assets/banners/banner-3.jpg" alt="Polres Wonogiri" loading="lazy" /></div>
+              <div class="banner-slide"><img src="assets/banners/banner-4.jpg" alt="BPBD Wonogiri" loading="lazy" /></div>
+              <div class="banner-slide"><img src="assets/banners/banner-5.jpg" alt="SAR Wonogiri" loading="lazy" /></div>
+              <div class="banner-slide"><img src="assets/banners/banner-6.jpg" alt="DISHUB Wonogiri" loading="lazy" /></div>
+              <div class="banner-slide"><img src="assets/banners/banner-7.png" alt="PMI Wonogiri" loading="lazy" /></div>
+            </div>
+            <!-- Dot indicator -->
+            <div class="banner-dots" id="banner-dots" aria-label="Panel indikator">
+              <button class="banner-dot active" data-idx="0" aria-label="Panel 1"></button>
+              <button class="banner-dot" data-idx="1" aria-label="Panel 2"></button>
+              <button class="banner-dot" data-idx="2" aria-label="Panel 3"></button>
+              <button class="banner-dot" data-idx="3" aria-label="Panel 4"></button>
+              <button class="banner-dot" data-idx="4" aria-label="Panel 5"></button>
+              <button class="banner-dot" data-idx="5" aria-label="Panel 6"></button>
+              <button class="banner-dot" data-idx="6" aria-label="Panel 7"></button>
+            </div>
+          </div>
+
+          <!-- Stats polos di bawah banner — tanpa panel -->
+          <div class="hero-stats-plain" role="list" aria-label="Statistik layanan">
+            <div class="stat-plain-item" role="listitem">
+              <span class="stat-plain-number" data-count="9" data-suffix="" id="stat-instansi">9</span>
+              <span class="stat-plain-label">Instansi Darurat</span>
+            </div>
+            <div class="stat-plain-sep" aria-hidden="true"></div>
+            <div class="stat-plain-item" role="listitem">
+              <span class="stat-plain-number" data-count="24" data-suffix="H" id="stat-jam">24H</span>
+              <span class="stat-plain-label">Siaga Non-Stop</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- GPS BAR -->
+      <div class="gps-bar" role="complementary">
+        <div class="container gps-inner">
+          <button id="gps-btn" aria-label="Ambil lokasi GPS"><img src="assets/pin-lokasi.png" alt="" class="gps-btn-icon" /> Ambil Lokasi GPS Saya</button>
+          <span id="gps-status" aria-live="polite">Lokasi GPS akan otomatis dilampirkan ke laporan WhatsApp Anda.</span>
+        </div>
+      </div>
+
+      <!-- SEARCH & FILTER -->
+      <main id="main-content">
+        <section class="search-section" aria-labelledby="search-heading">
+          <div class="container">
+            <h2 id="search-heading" class="visually-hidden">Cari Layanan Darurat</h2>
+            <div class="search-wrapper" role="search">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input type="search" id="search-input" placeholder="Cari layanan, contoh: ambulans, kebakaran..." autocomplete="off" aria-label="Cari layanan darurat" />
+            </div>
+            <div class="category-filters-wrapper" role="navigation" aria-label="Filter kategori">
+              <div id="category-filters" role="group"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICES GRID -->
+        <section class="services-section" id="services-section" aria-labelledby="services-heading">
+          <div class="container">
+            <h2 class="section-title" id="services-heading">Instansi Layanan Darurat</h2>
+            <div id="service-grid" role="list"></div>
+            <div id="no-result" role="status" aria-live="polite">
+              <span class="no-result-icon">🔍</span>
+              <p>Tidak ada layanan yang cocok.</p>
+              <small>Coba kata kunci lain seperti "ambulans", "polisi", atau "bencana".</small>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="footer" role="contentinfo">
+        <div class="container">
+          <div class="footer-center-content">
+            <h3 class="footer-main-title">PRACI SIAGA</h3>
+            <p class="footer-sub-title">Informasi &amp; Akses Cepat Layanan Darurat Terintegrasi</p>
+            <p class="footer-sub-location">
+              Kecamatan Pracimantoro<br />
+              Kabupaten Wonogiri, Jawa Tengah<br />
+              Kode Pos 57664
+            </p>
+            <div class="footer-divider-simple"></div>
+            <p class="footer-copyright-text">
+              &copy; 2026 PRACI SIAGA &middot; Hak Cipta Dilindungi &middot; TEGAR.S.A
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      <!-- WHATSAPP MODAL -->
+      <div class="modal-overlay" id="wa-modal" role="dialog" aria-modal="true" aria-labelledby="wa-modal-title">
+        <div class="modal-box" role="document">
+          <div class="modal-header">
+            <div>
+              <div id="wa-service-info" style="margin-bottom:6px;font-size:0.8rem;"></div>
+              <h3 id="wa-modal-title">Buat Laporan Darurat</h3>
+            </div>
+            <button class="modal-close" onclick="closeWhatsAppModal()" aria-label="Tutup modal">✕</button>
+          </div>
+          <form id="wa-form" novalidate>
+            <!-- 1. Nama Pelapor (WAJIB) -->
+            <div class="form-group">
+              <label class="form-label" for="wa-reporter">
+                1. Nama Pelapor <span style="color:var(--danger)">* (Wajib)</span>
+              </label>
+              <input type="text" class="form-control" id="wa-reporter" placeholder="Masukkan nama lengkap Anda" required autocomplete="name"/>
+            </div>
+
+            <!-- 2. Jenis Kejadian (WAJIB - Tulis Sendiri) -->
+            <div class="form-group">
+              <label class="form-label" for="wa-incident">
+                2. Jenis Kejadian <span style="color:var(--danger)">* (Wajib)</span>
+              </label>
+              <input type="text" class="form-control" id="wa-incident" placeholder="Tuliskan jenis kejadian (contoh: Kebakaran, Kecelakaan...)" required />
+            </div>
+
+            <!-- 3. Lokasi Kejadian (WAJIB - 2 Tombol: Pilih Manual & Lokasi Saat Ini) -->
+            <div class="form-group">
+              <label class="form-label" for="wa-location">
+                3. Lokasi Kejadian <span style="color:var(--danger)">* (Wajib)</span>
+              </label>
+              <div class="location-btn-group">
+                <button type="button" class="btn-loc-opt btn-loc-opt--manual" onclick="openManualMaps()">
+                  Pilih Manual (Maps)
+                </button>
+                <button type="button" class="btn-loc-opt btn-loc-opt--auto" id="btn-wa-gps" onclick="requestWaLocation()">
+                  Lokasi Anda Saat Ini
+                </button>
+              </div>
+              <input type="text" class="form-control" id="wa-location" placeholder="Ketik alamat atau paste link Google Maps" required autocomplete="off"/>
+            </div>
+
+            <!-- 4. Foto Kejadian (OPSIONAL) -->
+            <div class="form-group">
+              <label class="form-label" for="wa-photo">
+                4. Foto Kejadian <span style="color:var(--gray-600);font-weight:500;">(Opsional)</span>
+              </label>
+              <input type="file" class="form-control" id="wa-photo" accept="image/*" onchange="handlePhotoSelect(event)"/>
+              
+              <!-- Container Preview & Tombol Hapus X -->
+              <div id="photo-preview-container" class="photo-preview-box hidden">
+                <div class="photo-preview-thumb">
+                  <img id="photo-preview-img" src="" alt="Preview Foto" />
+                </div>
+                <div class="photo-preview-info">
+                  <span id="photo-file-name" class="photo-file-name"></span>
+                  <span id="photo-file-size" class="photo-file-size"></span>
+                </div>
+                <button type="button" class="btn-clear-photo" onclick="clearSelectedPhoto()" title="Hapus file foto ini" aria-label="Batal/Hapus foto yang diupload">
+                  ✕
+                </button>
+              </div>
+
+              <small style="font-size:0.75rem;color:var(--gray-600);margin-top:4px;display:block;">
+                📷 Pilih foto dari galeri. Foto <strong>tidak bisa</strong> dikirim otomatis via link WhatsApp — panduan cara melampirkannya akan ditampilkan sebelum chat terbuka.
+              </small>
+            </div>
+
+            <!-- 5. Keterangan Tambahan (OPSIONAL) -->
+            <div class="form-group">
+              <label class="form-label" for="wa-notes">
+                5. Keterangan Tambahan <span style="color:var(--gray-600);font-weight:500;">(Opsional)</span>
+              </label>
+              <textarea class="form-control" id="wa-notes" rows="3" placeholder="Kondisi korban, perkiraan jumlah orang terdampak, rincian bantuan..."></textarea>
+            </div>
+
+            <!-- Tombol Kirim via WhatsApp -->
+            <button type="submit" class="btn-wa-submit">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+              Kirim Laporan via WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- MAP PICKER MODAL -->
+      <div class="modal-overlay" id="map-picker-modal" role="dialog" aria-modal="true" aria-labelledby="map-picker-title">
+        <div class="modal-box map-picker-modal-box" role="document">
+          <div class="modal-header">
+            <div>
+              <h3 id="map-picker-title">Tandai Lokasi Kejadian</h3>
+              <p style="font-size:0.8rem;color:var(--gray-600);margin-top:2px;">Klik atau geser penanda untuk menentukan alamat lokasi tepat</p>
+            </div>
+            <button class="modal-close" onclick="closeMapPickerModal()" aria-label="Tutup peta">✕</button>
+          </div>
+
+          <!-- Leaflet Map Container -->
+          <div id="map-container" style="width:100%;height:300px;border-radius:var(--radius-sm);overflow:hidden;border:1.5px solid var(--primary-pale);margin-bottom:12px;position:relative;">
+          </div>
+
+          <!-- Live Address Result Box -->
+          <div class="map-address-box">
+            <img src="assets/pin-lokasi.png" alt="Pin Lokasi" class="map-address-pin-img" />
+            <div class="map-address-text">
+              <strong id="map-selected-title">Sedang mendeteksi alamat...</strong>
+              <div id="map-selected-address" class="map-selected-address">Klik pada peta untuk memilih titik lokasi</div>
+            </div>
+          </div>
+
+          <div class="map-picker-actions">
+            <button type="button" class="btn-cancel-map" onclick="closeMapPickerModal()">Batal</button>
+            <button type="button" class="btn-confirm-map" onclick="confirmMapLocation()">
+              Klik Tandai &amp; Gunakan Lokasi Ini
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHOTO GUIDE MODAL — Panduan melampirkan foto ke WhatsApp -->
+      <div class="modal-overlay" id="photo-guide-modal" role="dialog" aria-modal="true" aria-labelledby="pg-modal-title">
+        <div class="modal-box photo-guide-modal-box" role="document">
+          <div class="modal-header">
+            <div>
+              <h3 id="pg-modal-title">📷 Lampirkan Foto ke WhatsApp</h3>
+              <p style="font-size:0.78rem;color:var(--gray-600);margin-top:2px;">Browser Anda belum mendukung berbagi otomatis — ikuti langkah di bawah</p>
+            </div>
+            <button class="modal-close" onclick="closePhotoGuideModal()" aria-label="Tutup panduan foto">✕</button>
+          </div>
+
+          <!-- Preview foto besar -->
+          <div class="pg-photo-wrap">
+            <img id="pg-preview-img" src="" alt="Preview foto laporan" class="pg-photo-img" />
+            <div class="pg-file-info">
+              <span id="pg-file-name" class="pg-fname"></span>
+              <span id="pg-file-size" class="pg-fsize"></span>
+            </div>
+          </div>
+
+          <!-- Tombol unduh foto -->
+          <button type="button" id="pg-save-btn" class="btn-pg-download">
+            📥 Simpan / Unduh Foto ke Perangkat
+          </button>
+
+          <!-- Instruksi langkah demi langkah -->
+          <div class="pg-steps">
+            <p class="pg-steps-title">⚡ Cara melampirkan foto setelah WhatsApp terbuka:</p>
+            <ol class="pg-steps-list">
+              <li>Klik tombol <strong>"Buka WhatsApp &amp; Kirim Pesan"</strong> di bawah — pesan laporan akan terisi otomatis.</li>
+              <li>Setelah WhatsApp terbuka dan pesan terkirim, ketuk ikon <strong>📎 (lampiran)</strong> atau <strong>kamera</strong> di chat.</li>
+              <li>Pilih foto kejadian dari <strong>galeri</strong> perangkat Anda.</li>
+              <li>Tekan <strong>Kirim</strong> untuk mengirimkan foto tersebut.</li>
+            </ol>
+            <p class="pg-steps-tip">💡 <em>Jika foto belum tersimpan di galeri, gunakan tombol Simpan/Unduh di atas terlebih dahulu.</em></p>
+          </div>
+
+          <!-- Tombol Aksi -->
+          <div class="pg-actions">
+            <button type="button" class="btn-pg-cancel" onclick="closePhotoGuideModal()">Kembali</button>
+            <button type="button" class="btn-pg-confirm" onclick="confirmSendWithPhoto()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+              Buka WhatsApp &amp; Kirim Pesan
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- PANIC MODAL -->
+      <div class="modal-overlay" id="panic-modal" role="dialog" aria-modal="true" aria-labelledby="panic-modal-heading">
+        <div class="modal-box panic-modal-box" role="document">
+          <div class="modal-header">
+            <h3 id="panic-modal-heading">🆘 Akses Darurat Cepat</h3>
+            <button class="modal-close" onclick="closePanicModal()" aria-label="Tutup panel darurat">✕</button>
+          </div>
+          <p style="font-size:0.875rem;color:var(--gray-600);margin-bottom:16px;">Pilih dan hubungi instansi darurat yang sesuai segera:</p>
+          <div class="panic-services" role="list">
+            <!-- Polisi - Telepon 110 -->
+            <div class="panic-service-item" role="listitem">
+              <div>
+                <div class="panic-service-name">🛡️ Polsek Pracimantoro</div>
+                <div class="panic-service-number">110 (Darurat Polri)</div>
+              </div>
+              <a href="tel:110" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> 110</a>
+            </div>
+            <!-- Polisi - WhatsApp -->
+            <div class="panic-service-item" role="listitem" style="background:#F0FFF4;border-color:#86EFAC;">
+              <div>
+                <div class="panic-service-name" style="color:#16A34A;">💬 Polsek Pracimantoro (WA)</div>
+                <div class="panic-service-number">+62 851-9620-1594</div>
+              </div>
+              <a href="https://wa.me/6285196201594" target="_blank" rel="noopener" class="btn-panic-call" style="background:#16A34A;">💬 WA</a>
+            </div>
+            <div class="panic-service-item" role="listitem">
+              <div><div class="panic-service-name">🔥 Damkar Baturetno</div><div class="panic-service-number">(0273) 4632911</div></div>
+              <a href="tel:+6227346329110" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+            </div>
+            <div class="panic-service-item" role="listitem">
+              <div><div class="panic-service-name">🔥 Damkar Induk Wonogiri</div><div class="panic-service-number">(0273) 322013</div></div>
+              <a href="tel:+62273322013" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+            </div>
+            <div class="panic-service-item" role="listitem">
+              <div><div class="panic-service-name">🚑 Ambulans Puskesmas 1</div><div class="panic-service-number">(0273) 461415</div></div>
+              <a href="tel:+62273461415" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+            </div>
+            <div class="panic-service-item" role="listitem">
+              <div><div class="panic-service-name">🚑 Ambulans Puskesmas 2</div><div class="panic-service-number">0895-3933-19589</div></div>
+              <a href="tel:+6289539331958" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+            </div>
+            <div class="panic-service-item" role="listitem">
+              <div><div class="panic-service-name">⛑️ BPBD Wonogiri</div><div class="panic-service-number">(0273) 323184</div></div>
+              <a href="tel:+62273323184" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+            </div>
+            <div class="panic-service-item" role="listitem">
+              <div><div class="panic-service-name">🔭 SAR Wonogiri</div><div class="panic-service-number">(0273) 321090</div></div>
+              <a href="tel:+62273321090" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+            </div>
+            <div class="panic-service-item" role="listitem">
+              <div><div class="panic-service-name">🩸 PMI Wonogiri</div><div class="panic-service-number">(0273) 321123</div></div>
+              <a href="tel:+62273321123" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+            </div>
+            <div class="panic-service-item" role="listitem">
+              <div><div class="panic-service-name">🚦 DISHUB Wonogiri</div><div class="panic-service-number">(0273) 321147</div></div>
+              <a href="tel:+62273321147" class="btn-panic-call"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+            </div>
+            <div class="panic-service-item" role="listitem" style="background:#FEF2F2;border-color:var(--danger);">
+              <div>
+                <div class="panic-service-name" style="color:var(--danger);">🆘 Darurat Nasional</div>
+                <div class="panic-service-number">112 (Semua Kedaruratan)</div>
+              </div>
+              <a href="tel:112" class="btn-panic-call" style="background:var(--danger);"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> 112</a>
+            </div>
+          </div>
+          <button onclick="closePanicModal()" style="width:100%;padding:12px;background:var(--gray-100);border:none;border-radius:var(--radius-sm);font-weight:600;font-family:inherit;color:var(--gray-600);transition:var(--transition);" aria-label="Tutup panel darurat">Tutup</button>
+        </div>
+      </div>
+
+      <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    </div><!-- end #screen-telepon -->
+
+    <!-- ===================== LAYAR 2B: INFORMASI PENTING ===================== -->
+    <div id="screen-informasi" class="main-app hidden" role="application" aria-label="Informasi Penting">
+
+      <!-- NAVBAR Informasi -->
+      <header class="navbar navbar--info" role="banner">
+        <nav class="container navbar-inner">
+          <a class="navbar-brand" href="#" onclick="backToWelcome(); return false;" aria-label="Kembali">
+            <div class="navbar-logo" aria-hidden="true">
+              <img src="assets/logo.jpg" alt="Logo PRACI SIAGA" class="navbar-logo-img" />
+            </div>
+            <div class="navbar-title">PRACI SIAGA</div>
+          </a>
+          <div class="navbar-tabs">
+            <button class="nav-tab" onclick="backToWelcome()" aria-label="Beranda">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Beranda
+            </button>
+            <button class="nav-tab" onclick="goToTelepon()" aria-label="Telepon Darurat">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Telepon
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <!-- HERO Informasi — Tema Biru Terpadu -->
+      <section class="info-hero" aria-labelledby="hero-heading-info">
+        <div class="container">
+          <div class="info-hero-inner">
+            <div class="info-hero-icon" aria-hidden="true">
+              <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="28" cy="28" r="26" fill="#0284C7" stroke="#BAE6FD" stroke-width="3"/>
+                <circle cx="28" cy="17" r="4" fill="white"/>
+                <rect x="23" y="24" width="10" height="19" rx="4" fill="white"/>
+              </svg>
+            </div>
+            <div>
+              <h1 id="hero-heading-info" class="info-hero-title">Informasi Penting</h1>
+              <p class="info-hero-sub">Pusat informasi layanan kepolisian &amp; panduan kedaruratan masyarakat</p>
+            </div>
+          </div>
+
+          <!-- TOMBOL PILIHAN INFORMASI (MENU UTAMA INFORMASI PENTING) -->
+          <div class="info-topic-nav" role="tablist" aria-label="Pilihan Informasi Penting">
+            <button class="info-topic-btn active" id="tab-topic-spkt" onclick="selectInfoTopic('spkt')" role="tab" aria-selected="true" aria-controls="panel-topic-spkt">
+              <span class="info-topic-num">1</span>
+              <span class="info-topic-text">
+                <span class="info-topic-title">INFORMASI LAYANAN SPKT KEPOLISIAN</span>
+                <span class="info-topic-desc">Alur pelayanan, pengaduan &amp; laporan polisi</span>
+              </span>
+            </button>
+            <button class="info-topic-btn" id="tab-topic-p3k" onclick="selectInfoTopic('p3k')" role="tab" aria-selected="false" aria-controls="panel-topic-p3k">
+              <span class="info-topic-num">2</span>
+              <span class="info-topic-text">
+                <span class="info-topic-title">INFORMASI LAYANAN PEMADAM KEBAKARAN</span>
+                <span class="info-topic-desc">Jenis layanan, prosedur darurat kebakaran</span>
+              </span>
+            </button>
+            <button class="info-topic-btn" id="tab-topic-puskesmas" onclick="selectInfoTopic('puskesmas')" role="tab" aria-selected="false" aria-controls="panel-topic-puskesmas">
+              <span class="info-topic-num">3</span>
+              <span class="info-topic-text">
+                <span class="info-topic-title">LAYANAN PUSKESMAS</span>
+                <span class="info-topic-desc">Jenis layanan, syarat berobat &amp; alur rujukan</span>
+              </span>
+            </button>
+            <button class="info-topic-btn" id="tab-topic-bpbd" onclick="selectInfoTopic('bpbd')" role="tab" aria-selected="false" aria-controls="panel-topic-bpbd">
+              <span class="info-topic-num">4</span>
+              <span class="info-topic-text">
+                <span class="info-topic-title">LAYANAN BPBD</span>
+                <span class="info-topic-desc">Penanggulangan bencana &amp; alur pelaporan</span>
+              </span>
+            </button>
+            <button class="info-topic-btn" id="tab-topic-sar" onclick="selectInfoTopic('sar')" role="tab" aria-selected="false" aria-controls="panel-topic-sar">
+              <span class="info-topic-num">5</span>
+              <span class="info-topic-text">
+                <span class="info-topic-title">INFORMASI LAYANAN SAR WONOGIRI</span>
+                <span class="info-topic-desc">Pencarian &amp; pertolongan kedaruratan</span>
+              </span>
+            </button>
+            <button class="info-topic-btn" id="tab-topic-dishub" onclick="selectInfoTopic('dishub')" role="tab" aria-selected="false" aria-controls="panel-topic-dishub">
+              <span class="info-topic-num">6</span>
+              <span class="info-topic-text">
+                <span class="info-topic-title">INFORMASI LAYANAN DISHUB WONOGIRI</span>
+                <span class="info-topic-desc">Layanan lalu lintas &amp; transportasi</span>
+              </span>
+            </button>
+            <button class="info-topic-btn" id="tab-topic-pmi" onclick="selectInfoTopic('pmi')" role="tab" aria-selected="false" aria-controls="panel-topic-pmi">
+              <span class="info-topic-num">7</span>
+              <span class="info-topic-text">
+                <span class="info-topic-title">INFORMASI LAYANAN PMI WONOGIRI</span>
+                <span class="info-topic-desc">Donor darah, ambulans &amp; bantuan kemanusiaan</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- MAIN CONTENT INFORMASI -->
+      <main id="info-main-content" class="info-main">
+        <div class="container">
+
+          <!-- ================= PANEL 1: INFORMASI LAYANAN SPKT KEPOLISIAN ================= -->
+          <div id="panel-topic-spkt" class="info-topic-panel" role="tabpanel" aria-labelledby="tab-topic-spkt">
+            
+            <!-- SPKT Header Banner Card -->
+            <div class="spkt-banner-card">
+              <div class="spkt-banner-logo" style="background:#ffffff;">
+                <img src="assets/polda-jateng.png" alt="Logo POLDA JATENG" />
+              </div>
+              <div class="spkt-banner-content">
+                <span class="spkt-badge">POLRI · POLSEK PRACIMANTORO</span>
+                <h2 class="spkt-main-title">Sentra Pelayanan Kepolisian Terpadu (SPKT)</h2>
+                <p class="spkt-desc">
+                  SPKT bertugas memberikan pelayanan kepolisian secara terpadu terhadap laporan/pengaduan masyarakat, memberikan bantuan dan pertolongan, serta memberikan pelayanan informasi.
+                </p>
+              </div>
+            </div>
+
+            <!-- BAGIAN A: Jenis Layanan yang Disediakan -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN A</span>
+                  <span class="spkt-section-pill">11 Jenis Layanan</span>
+                </div>
+                <h3 class="spkt-section-title">Jenis Layanan yang Disediakan SPKT POLRI</h3>
+                <p class="spkt-section-sub">Sentra Pelayanan Kepolisian Terpadu (SPKT) siap melayani berbagai dokumen resmi dan perizinan masyarakat berikut:</p>
+              </div>
+
+              <div class="spkt-services-grid">
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">LP</span>
+                  <div class="spkt-chip-info">
+                    <strong>Laporan Polisi (LP)</strong>
+                    <small>Penerimaan dan registrasi laporan tindak pidana atau peristiwa hukum.</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">STTPLP</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Tanda Terima Laporan Polisi (STTPLP)</strong>
+                    <small>Tanda bukti resmi bahwa Laporan Polisi telah diterima oleh pihak kepolisian.</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">SP2HP</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Pemberitahuan Perkembangan Hasil Penyidikan (SP2HP)</strong>
+                    <small>Informasi resmi perkembangan proses penyidikan kepada pihak pelapor.</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">SKTLK</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Keterangan Tanda Lapor Kehilangan (SKTLK)</strong>
+                    <small>Surat kehilangan dokumen penting (KTP, SIM, STNK, Ijazah, Buku Tabungan, dll.).</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">SKCK</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Keterangan Catatan Kepolisian (SKCK)</strong>
+                    <small>Penerbitan surat catatan kepolisian untuk melamar kerja, pendidikan, dll.</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">STTP</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Tanda Terima Pemberitahuan (STTP)</strong>
+                    <small>Tanda terima pemberitahuan kegiatan / acara keramaian masyarakat.</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">SKLD</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Keterangan Lapor Diri (SKLD)</strong>
+                    <small>Pelayanan administrasi lapor diri warga negara atau orang asing.</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">IZIN</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Izin Keramaian</strong>
+                    <small>Penerbitan izin resmi untuk acara masyarakat yang mengumpulkan massa.</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">REKOM</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Rekomendasi Izin Usaha Jasa Pengamanan</strong>
+                    <small>Rekomendasi legalitas perizinan usaha di bidang jasa pengamanan (Security).</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">SIM</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Izin Mengemudi (SIM)</strong>
+                    <small>Informasi &amp; panduan penerbitan atau perpanjangan SIM.</small>
+                  </div>
+                </div>
+
+                <div class="spkt-service-chip">
+                  <span class="spkt-chip-badge">STNK</span>
+                  <div class="spkt-chip-info">
+                    <strong>Surat Tanda Nomor Kendaraan Bermotor (STNK)</strong>
+                    <small>Informasi &amp; layanan administrasi dokumen kendaraan bermotor.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BAGIAN B: Alur Mekanisme Pelayanan SPKT -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN B</span>
+                  <span class="spkt-section-pill">Mekanisme &amp; Prosedur</span>
+                </div>
+                <h3 class="spkt-section-title">Alur Mekanisme Pelayanan SPKT</h3>
+                <p class="spkt-section-sub">Pilih salah satu tab di bawah untuk melihat alur tahapan secara runtut:</p>
+              </div>
+
+              <!-- Sub-Navigasi Alur (Pengaduan vs Laporan Polisi) -->
+              <div class="spkt-flow-nav" role="tablist" aria-label="Alur Mekanisme SPKT">
+                <button class="spkt-flow-tab-btn active" id="spkt-tab-pengaduan" onclick="selectSpktFlow('pengaduan')" role="tab" aria-selected="true" aria-controls="spkt-flow-pengaduan">
+                  <span class="flow-tab-indicator">A</span>
+                  <span>Layanan Pengaduan</span>
+                </button>
+                <button class="spkt-flow-tab-btn" id="spkt-tab-laporan" onclick="selectSpktFlow('laporan')" role="tab" aria-selected="false" aria-controls="spkt-flow-laporan">
+                  <span class="flow-tab-indicator">B</span>
+                  <span>Layanan Laporan Polisi (LP)</span>
+                </button>
+              </div>
+
+              <!-- ================= ALUR A: LAYANAN PENGADUAN ================= -->
+              <div id="spkt-flow-pengaduan" class="spkt-flow-content" role="tabpanel" aria-labelledby="spkt-tab-pengaduan">
+                <div class="flow-timeline">
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">1</div>
+                    <div class="flow-step-body">
+                      <h4>Menyiapkan Pengaduan</h4>
+                      <p>Masyarakat menyiapkan pengaduan, kronologis kejadian, data pendukung, serta identitas diri.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">2</div>
+                    <div class="flow-step-body">
+                      <h4>Penyampaian Pengaduan</h4>
+                      <p>Pengaduan dapat disampaikan secara <strong>lisan melalui telepon/HP</strong> atau dengan <strong>datang langsung</strong> ke ruang SPKT.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">3</div>
+                    <div class="flow-step-body">
+                      <h4>Kelengkapan Berkas (Jika Datang Langsung)</h4>
+                      <p>Jika datang langsung ke ruang pelayanan SPKT, masyarakat melakukan:</p>
+                      <ul class="flow-checklist">
+                        <li>Mengisi buku tamu</li>
+                        <li>Mengisi formulir surat pernyataan</li>
+                        <li>Mengisi formulir kronologis peristiwa</li>
+                        <li>Menyerahkan identitas diri (KTP/SIM/Paspor)</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">4</div>
+                    <div class="flow-step-body">
+                      <h4>Penerimaan oleh Petugas SPKT</h4>
+                      <p>Pengaduan diterima secara resmi oleh <strong>Ka Siaga SPKT / Piket Fungsi Siaga</strong>.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">5</div>
+                    <div class="flow-step-body">
+                      <h4>Kajian Awal / Gelar Awal</h4>
+                      <p>Petugas melakukan kajian awal atau gelar awal terhadap pokok materi serta bukti pengaduan.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">6</div>
+                    <div class="flow-step-body">
+                      <h4>Putusan Tindak Lanjut</h4>
+                      <p>Setelah kajian awal, petugas menetapkan putusan resmi mengenai bentuk tindak lanjut pengaduan.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step flow-step--final">
+                    <div class="flow-step-num">7</div>
+                    <div class="flow-step-body">
+                      <h4>Tindakan Berdasarkan Putusan</h4>
+                      <p>Berdasarkan putusan kajian, pengaduan dapat ditindaklanjuti dengan salah satu opsi berikut:</p>
+                      <ul class="flow-checklist">
+                        <li>Didatangi Tempat Kejadian Perkara (TKP / TPK)</li>
+                        <li>Diterima sebagai laporan atau aduan resmi</li>
+                        <li>Diarahkan atau ditingkatkan menjadi Laporan Polisi (LP)</li>
+                        <li>Diterbitkan Surat Tanda Terima Laporan Polisi (STTLP)</li>
+                        <li>Dibuat surat pengantar atau dilimpahkan ke instansi terkait</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- ================= ALUR B: LAYANAN LAPORAN POLISI (LP) ================= -->
+              <div id="spkt-flow-laporan" class="spkt-flow-content hidden" role="tabpanel" aria-labelledby="spkt-tab-laporan">
+                <div class="flow-timeline">
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">1</div>
+                    <div class="flow-step-body">
+                      <h4>Kedatangan Pelapor</h4>
+                      <p>Masyarakat korban / pelapor datang langsung ke Sentra Pelayanan Kepolisian Terpadu (SPKT).</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">2</div>
+                    <div class="flow-step-body">
+                      <h4>Pelayanan di Ruang Pengaduan</h4>
+                      <p>Masyarakat mendapatkan pelayanan di Ruang Pelayanan Pengaduan yang meliputi:</p>
+                      <ul class="flow-checklist">
+                        <li>Konsultasi hukum &amp; kedaruratan</li>
+                        <li>Registrasi blangko pengaduan/laporan</li>
+                        <li>Rekomendasi pembuatan Laporan Polisi (LP)</li>
+                        <li>Rekomendasi penilaian Laporan Polisi</li>
+                        <li>Gelar awal perkara</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">3</div>
+                    <div class="flow-step-body">
+                      <h4>Pendalaman Laporan</h4>
+                      <p>Selanjutnya petugas melakukan pendalaman terhadap laporan dan kronologi peristiwa.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">4</div>
+                    <div class="flow-step-body">
+                      <h4>Penyaluran ke Satuan Fungsi Berwenang</h4>
+                      <p>Berdasarkan hasil pendalaman, laporan disalurkan kepada satuan fungsi yang sesuai:</p>
+                      <div class="satuan-tags">
+                        <span class="sat-tag sat-tag--reskrim">Sat Reskrim</span>
+                        <span class="sat-tag sat-tag--narkoba">Sat Resnarkoba</span>
+                        <span class="sat-tag sat-tag--lantas">Sat Lantas</span>
+                        <span class="sat-tag sat-tag--intel">Sat Intelkam</span>
+                        <span class="sat-tag sat-tag--propam">Sat Propam</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">5</div>
+                    <div class="flow-step-body">
+                      <h4>Tindakan Penanganan Satuan Khusus</h4>
+                      <p>Untuk laporan yang ditangani oleh Satreskrim, Satresnarkoba, atau Sat Propam, dilakukan proses:</p>
+                      <ul class="flow-checklist">
+                        <li>Gelar perkara awal</li>
+                        <li>Melengkapi barang &amp; alat bukti</li>
+                        <li>Mendatangi Tempat Kejadian Perkara (TKP)</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">6</div>
+                    <div class="flow-step-body">
+                      <h4>Tahap Pengawasan Penyidikan (Wassidik)</h4>
+                      <p>Laporan masuk ke tahap Pengawasan Penyidikan (Wassidik) untuk memastikan akuntabilitas proses hukum.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">7</div>
+                    <div class="flow-step-body">
+                      <h4>Penyaluran Sesuai Kebutuhan Penanganan</h4>
+                      <p>Setelah tahap Wassidik, berkas laporan disalurkan sesuai dengan kebutuhan penanganannya.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">8</div>
+                    <div class="flow-step-body">
+                      <h4>Koordinasi &amp; Surat Pengantar Instansi Terkait</h4>
+                      <p>Jika laporan perlu diteruskan ke instansi terkait, Siaga SPKT menerbitkan surat pengantar ke:</p>
+                      <ul class="flow-checklist">
+                        <li>Pengadilan Negeri</li>
+                        <li>PTUN (Pengadilan Tata Usaha Negara)</li>
+                        <li>POM TNI (Polisi Militer TNI)</li>
+                        <li>Instansi kedinasan terkait lainnya</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">9</div>
+                    <div class="flow-step-body">
+                      <h4>Proses oleh Piket Reskrim</h4>
+                      <p>Apabila laporan ditangani langsung oleh Piket Reskrim, proses meliputi:</p>
+                      <ul class="flow-checklist">
+                        <li>Datang ke Tempat Kejadian Perkara (TKP)</li>
+                        <li>Memeriksa saksi-saksi korban / saksi mata</li>
+                        <li>Mengumpulkan alat dan barang bukti</li>
+                        <li>Koordinasi JJR</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flow-step">
+                    <div class="flow-step-num">10</div>
+                    <div class="flow-step-body">
+                      <h4>Proses Penyelidikan &amp; Penyidikan</h4>
+                      <p>Penyidik melanjutkan proses penyelidikan dan penyidikan formal berdasarkan hukum acara pidana.</p>
+                    </div>
+                  </div>
+
+                  <div class="flow-step flow-step--final">
+                    <div class="flow-step-num">11</div>
+                    <div class="flow-step-body">
+                      <h4>Penyampaian SP2HP Kepada Pelapor</h4>
+                      <p>Perkembangan hasil penyidikan disampaikan secara berkala kepada pelapor melalui <strong>SP2HP (Surat Pemberitahuan Perkembangan Hasil Penyidikan)</strong>.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- ================= PANEL 2: INFORMASI LAYANAN PEMADAM KEBAKARAN ================= -->
+          <div id="panel-topic-p3k" class="info-topic-panel hidden" role="tabpanel" aria-labelledby="tab-topic-p3k">
+
+            <!-- Banner Card Damkar -->
+            <div class="spkt-banner-card" style="background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 50%, #DC2626 100%);">
+              <div class="spkt-banner-logo" style="background:#ffffff;">
+                <img src="assets/damkar.png" alt="Logo Pemadam Kebakaran" />
+              </div>
+              <div class="spkt-banner-content">
+                <span class="spkt-badge">DAMKAR · KABUPATEN WONOGIRI</span>
+                <h2 class="spkt-main-title">2. INFORMASI LAYANAN PEMADAM KEBAKARAN</h2>
+                <p class="spkt-desc">
+                  Pemadam Kebakaran (Damkar) merupakan layanan tanggap darurat yang bertugas menangani kebakaran, penyelamatan, serta berbagai kondisi darurat yang membahayakan keselamatan masyarakat. Selain memadamkan api, petugas Damkar juga memiliki peran dalam penyelamatan korban, penanganan bahan berbahaya, evakuasi hewan, hingga pencegahan kebakaran.
+                </p>
+              </div>
+            </div>
+
+            <!-- BAGIAN A: Jenis Layanan Pemadaman Kebakaran -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN A</span>
+                  <span class="spkt-section-pill">8 Jenis Layanan</span>
+                </div>
+                <h3 class="spkt-section-title">Jenis Layanan Pemadaman Kebakaran</h3>
+                <p class="spkt-section-sub">Layanan operasional tanggap darurat dan penyelamatan oleh petugas Pemadam Kebakaran:</p>
+              </div>
+
+              <ol class="info-ol">
+                <li>
+                  <strong>1. Pemadaman Kebakaran</strong>
+                  <p>Petugas Damkar bertugas menangani dan memadamkan kebakaran yang terjadi di berbagai lokasi, seperti rumah, gedung, perkantoran, kawasan industri, kendaraan, hutan, maupun lahan. Respons yang cepat dan tepat sangat penting untuk mencegah api meluas serta melindungi jiwa dan harta benda.</p>
+                </li>
+                <li>
+                  <strong>2. Penyelamatan dan Evakuasi</strong>
+                  <p>Damkar juga membantu menyelamatkan dan mengevakuasi korban dalam berbagai situasi darurat, seperti terjebak di dalam bangunan, lift, kendaraan, sumur, saluran air, maupun lokasi yang sulit dijangkau. Penyelamatan juga dapat dilakukan dalam kondisi bencana tertentu.</p>
+                </li>
+                <li>
+                  <strong>3. Penanganan Bahan Berbahaya</strong>
+                  <p>Petugas Damkar dapat menangani keadaan darurat yang melibatkan bahan berbahaya dan beracun (B3), seperti kebocoran gas atau tumpahan bahan kimia. Penanganan dilakukan dengan prosedur keselamatan untuk mengurangi risiko kebakaran, ledakan, kontaminasi, maupun keracunan.</p>
+                </li>
+                <li>
+                  <strong>4. Evakuasi Hewan Berbahaya</strong>
+                  <p>Damkar juga dapat membantu masyarakat dalam menangani hewan berbahaya atau hewan yang terjebak, seperti ular, lebah, biawak, atau hewan lain yang berada di tempat yang membahayakan manusia maupun hewan tersebut.</p>
+                </li>
+                <li>
+                  <strong>5. Bantuan Kecelakaan Lalu Lintas</strong>
+                  <p>Dalam kecelakaan lalu lintas, petugas Damkar dapat membantu mengevakuasi korban yang terjebak di dalam kendaraan menggunakan peralatan penyelamatan. Jika diperlukan, petugas juga memberikan pertolongan awal sambil menunggu atau berkoordinasi dengan layanan medis.</p>
+                </li>
+                <li>
+                  <strong>6. Pemeriksaan Keselamatan Kebakaran</strong>
+                  <p>Di wilayah yang memiliki kewenangan dan layanan terkait, Damkar dapat melakukan pemeriksaan sistem proteksi kebakaran pada bangunan, fasilitas umum, tempat usaha, maupun kawasan tertentu untuk membantu memastikan kesiapan menghadapi risiko kebakaran.</p>
+                </li>
+                <li>
+                  <strong>7. Edukasi dan Pencegahan Kebakaran</strong>
+                  <p>Damkar turut melakukan sosialisasi dan edukasi kepada masyarakat mengenai penyebab kebakaran, langkah pencegahan, penggunaan peralatan keselamatan, serta tindakan yang harus dilakukan ketika terjadi kebakaran.</p>
+                </li>
+                <li>
+                  <strong>8. Pelatihan dan Simulasi</strong>
+                  <p>Damkar dapat memberikan pelatihan kepada masyarakat, relawan, sekolah, maupun lingkungan kerja mengenai penggunaan APAR, prosedur evakuasi, pertolongan awal, dan simulasi menghadapi keadaan darurat kebakaran.</p>
+                </li>
+              </ol>
+            </div>
+
+            <!-- BAGIAN B: Prosedur Jika Terjadi Kebakaran -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN B</span>
+                  <span class="spkt-section-pill">Panduan Keselamatan</span>
+                </div>
+                <h3 class="spkt-section-title">Jika Terjadi Kebakaran</h3>
+                <p class="spkt-section-sub">Tetap tenang dan segera lakukan langkah-langkah darurat berikut:</p>
+              </div>
+
+              <ul class="info-ul">
+                <li>Segera menjauh dari sumber api dan menuju tempat yang aman.</li>
+                <li>Bantu evakuasi anak-anak, lansia, atau orang yang membutuhkan bantuan jika kondisi memungkinkan.</li>
+                <li>Hubungi layanan Pemadam Kebakaran melalui nomor darurat daerah setempat.</li>
+                <li>Sampaikan lokasi kejadian secara jelas, termasuk alamat atau patokan terdekat.</li>
+                <li>Jelaskan secara singkat jenis kejadian dan kondisi di lokasi.</li>
+                <li>Jangan kembali ke lokasi sebelum dinyatakan aman oleh petugas.</li>
+              </ul>
+
+              <div class="info-warning-box">
+                <strong>Peringatan Keselamatan:</strong> Dalam keadaan darurat, utamakan keselamatan jiwa. Jangan mengambil tindakan yang dapat membahayakan diri sendiri.
+              </div>
+
+              <div class="info-detail-box">
+                <p><strong>Layanan:</strong> Pemadam Kebakaran (Damkar)</p>
+                <p><strong>Jenis layanan:</strong> Kebakaran, penyelamatan, evakuasi, dan keadaan darurat terkait</p>
+                <p><strong>Cakupan:</strong> Menyesuaikan wilayah dan kewenangan Damkar setempat</p>
+                <p><strong>Nomor darurat:</strong> Gunakan nomor Damkar / layanan darurat resmi di wilayah Anda.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ================= PANEL 3: LAYANAN PUSKESMAS ================= -->
+          <div id="panel-topic-puskesmas" class="info-topic-panel hidden" role="tabpanel" aria-labelledby="tab-topic-puskesmas">
+
+            <!-- Banner Card Puskesmas -->
+            <div class="spkt-banner-card" style="background: linear-gradient(135deg, #0369A1 0%, #0284C7 50%, #0D9488 100%);">
+              <div class="spkt-banner-logo" style="background:#ffffff;">
+                <img src="assets/puskesmas.png" alt="Logo Puskesmas" />
+              </div>
+              <div class="spkt-banner-content">
+                <span class="spkt-badge">DINAS KESEHATAN · PUSKESMAS PRACIMANTORO 1 &amp; 2</span>
+                <h2 class="spkt-main-title">3. LAYANAN PUSKESMAS</h2>
+                <p class="spkt-desc">
+                  Puskesmas merupakan fasilitas pelayanan kesehatan tingkat pertama yang memberikan pelayanan kesehatan kepada masyarakat, mulai dari pemeriksaan dan pengobatan hingga pelayanan kesehatan ibu dan anak serta pencegahan penyakit.
+                </p>
+              </div>
+            </div>
+
+            <!-- BAGIAN A: Jenis Layanan Puskesmas -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN A</span>
+                  <span class="spkt-section-pill">10 Layanan Kesehatan</span>
+                </div>
+                <h3 class="spkt-section-title">Jenis Layanan Puskesmas Pracimantoro 1 &amp; 2</h3>
+                <p class="spkt-section-sub">Fasilitas pelayanan kesehatan dasar yang disediakan untuk seluruh lapisan masyarakat:</p>
+              </div>
+
+              <ol class="info-ol">
+                <li>
+                  <strong>1. Pemeriksaan dan Pengobatan</strong>
+                  <p>Melayani pemeriksaan kondisi kesehatan dan penanganan berbagai keluhan atau penyakit yang dapat ditangani di tingkat Puskesmas.</p>
+                </li>
+                <li>
+                  <strong>2. Pelayanan Kesehatan Ibu dan Anak</strong>
+                  <p>Meliputi pelayanan kesehatan ibu hamil, ibu menyusui, bayi, balita, dan anak, termasuk pemantauan tumbuh kembang.</p>
+                </li>
+                <li>
+                  <strong>3. Imunisasi</strong>
+                  <p>Memberikan pelayanan imunisasi sesuai program kesehatan untuk membantu melindungi masyarakat dari berbagai penyakit yang dapat dicegah dengan imunisasi.</p>
+                </li>
+                <li>
+                  <strong>4. Pelayanan Kesehatan Lansia</strong>
+                  <p>Pemeriksaan dan pemantauan kesehatan bagi masyarakat lanjut usia, termasuk pemeriksaan kondisi kesehatan secara berkala.</p>
+                </li>
+                <li>
+                  <strong>5. Pelayanan Kesehatan Gigi dan Mulut</strong>
+                  <p>Melayani pemeriksaan dan penanganan dasar terkait kesehatan gigi dan mulut.</p>
+                </li>
+                <li>
+                  <strong>6. Pelayanan Kesehatan Lingkungan</strong>
+                  <p>Melakukan upaya untuk menjaga kesehatan lingkungan, termasuk edukasi mengenai air bersih, sanitasi, kebersihan lingkungan, dan perilaku hidup bersih dan sehat.</p>
+                </li>
+                <li>
+                  <strong>7. Pemeriksaan Penyakit Menular dan Tidak Menular</strong>
+                  <p>Melakukan pemeriksaan, pencegahan, serta pemantauan berbagai penyakit menular maupun penyakit tidak menular seperti hipertensi dan diabetes.</p>
+                </li>
+                <li>
+                  <strong>8. Pelayanan Obat</strong>
+                  <p>Memberikan obat sesuai hasil pemeriksaan dan resep atau ketentuan pelayanan yang berlaku di Puskesmas.</p>
+                </li>
+                <li>
+                  <strong>9. Pelayanan Kesehatan Darurat Dasar</strong>
+                  <p>Memberikan penanganan awal terhadap kondisi yang membutuhkan pertolongan segera sesuai kemampuan dan fasilitas Puskesmas.</p>
+                </li>
+                <li>
+                  <strong>10. Konsultasi dan Edukasi Kesehatan</strong>
+                  <p>Memberikan informasi dan edukasi mengenai pola hidup sehat, pencegahan penyakit, penggunaan obat, serta perawatan kesehatan.</p>
+                </li>
+              </ol>
+            </div>
+
+            <!-- BAGIAN B: Syarat Berobat -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN B</span>
+                  <span class="spkt-section-pill">Administrasi Pasien</span>
+                </div>
+                <h3 class="spkt-section-title">Syarat Berobat</h3>
+                <p class="spkt-section-sub">Untuk mendapatkan pelayanan kesehatan di Puskesmas, masyarakat dapat menyiapkan dokumen berikut:</p>
+              </div>
+
+              <ul class="info-ul">
+                <li>KTP atau Kartu Keluarga (KK).</li>
+                <li>Kartu BPJS Kesehatan, jika memiliki.</li>
+                <li>Kartu identitas atau dokumen lain yang diperlukan sesuai ketentuan Puskesmas.</li>
+                <li>Untuk pasien yang sudah pernah berobat, membawa kartu/nomor rekam medis jika tersedia.</li>
+              </ul>
+
+              <div class="info-detail-box">
+                <p><strong>Catatan:</strong> Persyaratan administrasi dapat berbeda tergantung jenis pelayanan dan ketentuan yang berlaku. Sebaiknya tanyakan kepada petugas Puskesmas jika terdapat persyaratan khusus.</p>
+              </div>
+            </div>
+
+            <!-- BAGIAN C: Cara Mendapatkan Rujukan ke Rumah Sakit -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN C</span>
+                  <span class="spkt-section-pill">Fasilitas Rujukan Lanjutan</span>
+                </div>
+                <h3 class="spkt-section-title">Cara Mendapatkan Rujukan ke Rumah Sakit</h3>
+                <p class="spkt-section-sub">Rujukan ke rumah sakit tidak selalu diperlukan. Jika kondisi pasien dapat ditangani di Puskesmas, pasien akan mendapatkan pelayanan di Puskesmas. Apabila berdasarkan pemeriksaan dokter pasien membutuhkan pemeriksaan atau penanganan lebih lanjut yang tidak tersedia di Puskesmas, dokter dapat memberikan rujukan sesuai ketentuan yang berlaku.</p>
+              </div>
+
+              <h4 class="info-flow-title">Alur Rujukan</h4>
+              <ol class="info-flow-ol">
+                <li><strong>1. Datang ke Puskesmas</strong> — Pasien melakukan pendaftaran dan menyampaikan keluhan kesehatan kepada petugas.</li>
+                <li><strong>2. Pemeriksaan oleh Tenaga Kesehatan</strong> — Dokter atau tenaga kesehatan melakukan pemeriksaan dan menentukan kondisi pasien.</li>
+                <li><strong>3. Penentuan Kebutuhan Rujukan</strong> — Jika diperlukan pemeriksaan atau penanganan lebih lanjut di fasilitas kesehatan tingkat lanjutan, dokter menentukan rujukan.</li>
+                <li><strong>4. Penerbitan Surat Rujukan</strong> — Jika rujukan diperlukan, petugas akan membantu proses penerbitan surat rujukan sesuai sistem dan ketentuan yang berlaku.</li>
+                <li><strong>5. Menentukan Rumah Sakit Tujuan</strong> — Pasien diarahkan ke fasilitas kesehatan atau rumah sakit yang sesuai dengan kebutuhan medis dan ketentuan rujukan.</li>
+                <li><strong>6. Datang ke Rumah Sakit</strong> — Pasien membawa dokumen yang diperlukan dan mengikuti prosedur pelayanan di rumah sakit tujuan.</li>
+              </ol>
+
+              <div class="info-warning-box">
+                <strong>Penting untuk Diperhatikan:</strong> Untuk peserta BPJS Kesehatan, rujukan dari FKTP seperti Puskesmas pada umumnya digunakan ketika pasien membutuhkan pelayanan tingkat lanjutan. Dalam keadaan gawat darurat, pasien dapat langsung mendapatkan pertolongan di fasilitas kesehatan yang mampu menangani kondisi tersebut sesuai ketentuan yang berlaku.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ================= PANEL 4: LAYANAN BPBD ================= -->
+          <div id="panel-topic-bpbd" class="info-topic-panel hidden" role="tabpanel" aria-labelledby="tab-topic-bpbd">
+
+            <!-- Banner Card BPBD -->
+            <div class="spkt-banner-card" style="background: linear-gradient(135deg, #9A3412 0%, #C2410C 50%, #EA580C 100%);">
+              <div class="spkt-banner-logo" style="background:#ffffff;">
+                <img src="assets/bpbd.png" alt="Logo BPBD" />
+              </div>
+              <div class="spkt-banner-content">
+                <span class="spkt-badge">BPBD · KABUPATEN WONOGIRI</span>
+                <h2 class="spkt-main-title">4. LAYANAN BPBD</h2>
+                <p class="spkt-desc">
+                  Badan Penanggulangan Bencana Daerah (BPBD) merupakan instansi yang bertugas dalam penanggulangan bencana, mulai dari pencegahan dan kesiapsiagaan, penanganan keadaan darurat, hingga pemulihan setelah bencana.
+                </p>
+              </div>
+            </div>
+
+            <!-- BAGIAN A: Jenis Layanan BPBD -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN A</span>
+                  <span class="spkt-section-pill">9 Bidang Penanganan</span>
+                </div>
+                <h3 class="spkt-section-title">Jenis Layanan BPBD Kabupaten Wonogiri</h3>
+                <p class="spkt-section-sub">Ruang lingkup tugas dan pelayanan Badan Penanggulangan Bencana Daerah:</p>
+              </div>
+
+              <ol class="info-ol">
+                <li>
+                  <strong>1. Penanganan Bencana dan Keadaan Darurat</strong>
+                  <p>BPBD menangani berbagai kejadian bencana dan keadaan darurat, antara lain: banjir, tanah longsor, angin kencang, gempa bumi, kekeringan, tanah ambles atau tanah bergerak, kebakaran tertentu, serta bencana dan kejadian darurat lainnya.</p>
+                </li>
+                <li>
+                  <strong>2. Pencarian, Pertolongan, dan Evakuasi</strong>
+                  <p>BPBD membantu proses pencarian, penyelamatan, dan evakuasi masyarakat yang terdampak bencana. Dalam pelaksanaannya, BPBD dapat berkoordinasi dengan TNI, Polri, Damkar, PMI, tenaga kesehatan, relawan, dan instansi terkait.</p>
+                </li>
+                <li>
+                  <strong>3. Penanganan Dampak Bencana</strong>
+                  <p>BPBD melakukan pendataan dan koordinasi penanganan terhadap dampak bencana, termasuk kondisi lingkungan, kerusakan, serta kebutuhan masyarakat yang terdampak.</p>
+                </li>
+                <li>
+                  <strong>4. Bantuan dan Distribusi Logistik</strong>
+                  <p>BPBD membantu penyaluran kebutuhan darurat dan logistik kepada masyarakat yang terdampak sesuai kondisi dan kebutuhan di lapangan.</p>
+                </li>
+                <li>
+                  <strong>5. Penanganan Kekeringan dan Krisis Air</strong>
+                  <p>BPBD dapat melakukan penanganan kekeringan, termasuk membantu distribusi air bersih ke wilayah yang mengalami kesulitan mendapatkan air.</p>
+                </li>
+                <li>
+                  <strong>6. Informasi dan Pelaporan Bencana</strong>
+                  <p>Masyarakat dapat melaporkan kejadian bencana kepada BPBD untuk mendapatkan penanganan dan koordinasi lebih lanjut.</p>
+                </li>
+                <li>
+                  <strong>7. Pemantauan dan Peringatan Dini</strong>
+                  <p>BPBD melakukan pemantauan terhadap potensi dan risiko bencana serta menyampaikan informasi yang dapat membantu masyarakat meningkatkan kewaspadaan.</p>
+                </li>
+                <li>
+                  <strong>8. Edukasi dan Mitigasi Bencana</strong>
+                  <p>BPBD memberikan sosialisasi, edukasi, pelatihan, dan simulasi kepada masyarakat, sekolah, relawan, maupun kelompok lainnya untuk meningkatkan kesiapsiagaan menghadapi bencana.</p>
+                </li>
+                <li>
+                  <strong>9. Pemulihan Pascabencana</strong>
+                  <p>Setelah keadaan darurat, BPBD turut mendukung proses pemulihan, rehabilitasi, dan rekonstruksi sesuai kewenangan dan kondisi bencana.</p>
+                </li>
+              </ol>
+            </div>
+
+            <!-- BAGIAN B: Alur Pelaporan Bencana -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag">BAGIAN B</span>
+                  <span class="spkt-section-pill">SOP Tanggap Darurat</span>
+                </div>
+                <h3 class="spkt-section-title">Alur Pelaporan Bencana</h3>
+                <p class="spkt-section-sub">Tahapan pelaporan kejadian darurat dan bencana oleh masyarakat ke BPBD:</p>
+              </div>
+
+              <ol class="info-flow-ol">
+                <li><strong>1. Terjadi bencana atau keadaan darurat</strong> — Masyarakat menemukan atau mengalami kejadian seperti banjir, longsor, angin kencang, gempa, kekeringan, atau kejadian lain yang membutuhkan penanganan.</li>
+                <li><strong>2. Pastikan keselamatan diri</strong> — Menjauh dari lokasi yang berbahaya dan jangan mengambil tindakan yang dapat membahayakan diri sendiri.</li>
+                <li><strong>3. Hubungi BPBD</strong> — Sampaikan laporan melalui nomor telepon atau WhatsApp BPBD yang tersedia.</li>
+                <li>
+                  <strong>4. Sampaikan informasi kejadian</strong> — Berikan informasi secara jelas, meliputi:
+                  <ul class="info-ul info-ul--sub">
+                    <li>Jenis bencana atau kejadian.</li>
+                    <li>Lokasi kejadian secara lengkap.</li>
+                    <li>Patokan lokasi terdekat.</li>
+                    <li>Waktu kejadian.</li>
+                    <li>Kondisi terkini di lokasi.</li>
+                    <li>Jumlah atau kondisi korban jika diketahui.</li>
+                    <li>Kerusakan atau kondisi yang membahayakan.</li>
+                    <li>Nomor telepon pelapor yang dapat dihubungi.</li>
+                  </ul>
+                </li>
+                <li><strong>5. Laporan diterima dan diverifikasi</strong> — Petugas menerima laporan, mencatat informasi, dan melakukan verifikasi atau koordinasi untuk mengetahui kondisi di lapangan.</li>
+                <li><strong>6. Petugas menuju lokasi</strong> — Tim BPBD dan unsur terkait dikerahkan sesuai tingkat dan jenis kejadian.</li>
+                <li><strong>7. Penanganan dan evakuasi</strong> — Petugas melakukan tindakan sesuai kondisi, seperti penyelamatan, evakuasi, penanganan lokasi, pendataan, atau pemberian bantuan darurat.</li>
+                <li><strong>8. Koordinasi dengan instansi terkait</strong> — Apabila diperlukan, BPBD berkoordinasi dengan Damkar, PMI, SAR, TNI, Polri, Puskesmas, rumah sakit, pemerintah desa/kelurahan, relawan, dan instansi lainnya.</li>
+                <li><strong>9. Pemantauan dan tindak lanjut</strong> — Kondisi lokasi dan masyarakat terdampak dipantau untuk menentukan kebutuhan penanganan berikutnya.</li>
+              </ol>
+            </div>
+
+          </div>
+
+          <!-- ================= PANEL 5: LAYANAN SAR WONOGIRI ================= -->
+          <div id="panel-topic-sar" class="info-topic-panel hidden" role="tabpanel" aria-labelledby="tab-topic-sar">
+
+            <!-- Banner Card SAR -->
+            <div class="spkt-banner-card" style="background: linear-gradient(135deg, #115E59 0%, #0F766E 50%, #14B8A6 100%);">
+              <div class="spkt-banner-logo" style="background:#ffffff;">
+                <img src="assets/sar.png" alt="Logo SAR Wonogiri" />
+              </div>
+              <div class="spkt-banner-content">
+                <span class="spkt-badge">BASARNAS · SAR KABUPATEN WONOGIRI</span>
+                <h2 class="spkt-main-title">5. INFORMASI LAYANAN SAR WONOGIRI</h2>
+                <p class="spkt-desc">
+                  Layanan pencarian dan pertolongan (Search and Rescue) kedaruratan untuk penanganan musibah, orang hilang, dan evakuasi korban bencana alam di wilayah Wonogiri dan sekitarnya.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Kosong Sesuai Permintaan -->
+            <div class="spkt-section-card" style="text-align: center; padding: 48px 24px;">
+              <p style="color: var(--gray-500); font-size: 0.95rem; margin: 0;">
+                Informasi lengkap mengenai layanan SAR Wonogiri akan segera tersedia.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- ================= PANEL 6: LAYANAN DISHUB WONOGIRI ================= -->
+          <div id="panel-topic-dishub" class="info-topic-panel hidden" role="tabpanel" aria-labelledby="tab-topic-dishub">
+
+            <!-- Banner Card Dishub -->
+            <div class="spkt-banner-card" style="background: linear-gradient(135deg, #3730A3 0%, #4F46E5 50%, #6366F1 100%);">
+              <div class="spkt-banner-logo" style="background:#ffffff;">
+                <img src="assets/dishub.png" alt="Logo Dishub" />
+              </div>
+              <div class="spkt-banner-content">
+                <span class="spkt-badge">DISHUB · KABUPATEN WONOGIRI</span>
+                <h2 class="spkt-main-title">6. INFORMASI LAYANAN DISHUB WONOGIRI</h2>
+                <p class="spkt-desc">
+                  Layanan perhubungan terpadu, pengaturan keselamatan transportasi darat, perlengkapan jalan, dan rekayasa lalu lintas Kabupaten Wonogiri.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Kosong Sesuai Permintaan -->
+            <div class="spkt-section-card" style="text-align: center; padding: 48px 24px;">
+              <p style="color: var(--gray-500); font-size: 0.95rem; margin: 0;">
+                Informasi lengkap mengenai layanan Dinas Perhubungan Wonogiri akan segera tersedia.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- ================= PANEL 7: LAYANAN PMI WONOGIRI ================= -->
+          <div id="panel-topic-pmi" class="info-topic-panel hidden" role="tabpanel" aria-labelledby="tab-topic-pmi">
+
+            <!-- Banner Card PMI -->
+            <div class="spkt-banner-card" style="background: linear-gradient(135deg, #881337 0%, #BE123C 50%, #E11D48 100%);">
+              <div class="spkt-banner-logo" style="background:#ffffff;">
+                <img src="assets/pmi.png" alt="Logo PMI" />
+              </div>
+              <div class="spkt-banner-content">
+                <span class="spkt-badge">PMI · KABUPATEN WONOGIRI</span>
+                <h2 class="spkt-main-title">7. INFORMASI LAYANAN PMI WONOGIRI</h2>
+                <p class="spkt-desc">
+                  Layanan kemanusiaan Palang Merah Indonesia (PMI) meliputi unit donor darah, ambulans gawat darurat, pertolongan pertama, dan bantuan tanggap bencana.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Kosong Sesuai Permintaan -->
+            <div class="spkt-section-card" style="text-align: center; padding: 48px 24px;">
+              <p style="color: var(--gray-500); font-size: 0.95rem; margin: 0;">
+                Informasi lengkap mengenai layanan Palang Merah Indonesia (PMI) Wonogiri akan segera tersedia.
+              </p>
+            </div>
+
+          </div>
+
+        </div><!-- end .container -->
+      </main><!-- end #info-main-content -->
+
+      <!-- FOOTER Informasi -->
+      <footer class="footer" role="contentinfo">
+        <div class="container">
+          <div class="footer-center-content">
+            <h3 class="footer-main-title">PRACI SIAGA</h3>
+            <p class="footer-sub-title">Informasi &amp; Akses Cepat Layanan Darurat Terintegrasi</p>
+            <p class="footer-sub-location">
+              Kecamatan Pracimantoro<br />
+              Kabupaten Wonogiri, Jawa Tengah<br />
+              Kode Pos 57664
+            </p>
+            <div class="footer-divider-simple"></div>
+            <p class="footer-copyright-text">
+              &copy; 2026 PRACI SIAGA &middot; Hak Cipta Dilindungi &middot; TEGAR.S.A
+            </p>
+          </div>
+        </div>
+      </footer>
+
+    </div><!-- end #screen-informasi -->
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      // ============================================================
+      // NAVIGASI MULTI-LAYAR
+      // ============================================================
+
+      const SCREENS = ['welcome-screen', 'screen-telepon', 'screen-informasi'];
+
+      function showScreen(targetId, fromId, direction) {
+        const from = fromId ? document.getElementById(fromId) : null;
+        const to   = document.getElementById(targetId);
+        const outClass = direction === 'left'  ? 'slide-out'       : 'slide-out-right';
+        const inClass  = direction === 'left'  ? 'slide-in'        : 'slide-in-left';
+
+        if (from) {
+          from.classList.add(outClass);
+          setTimeout(() => {
+            from.classList.add('hidden');
+            from.classList.remove(outClass);
+            to.classList.remove('hidden');
+            to.classList.add(inClass);
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            setTimeout(() => to.classList.remove(inClass), 400);
+          }, 350);
+        } else {
+          // Hide all, show target
+          SCREENS.forEach(id => document.getElementById(id).classList.add('hidden'));
+          to.classList.remove('hidden');
+          to.classList.add(inClass);
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          setTimeout(() => to.classList.remove(inClass), 400);
+        }
+      }
+
+      function getActiveScreen() {
+        return SCREENS.find(id => !document.getElementById(id).classList.contains('hidden'));
+      }
+
+      /** Dari welcome → telepon atau informasi */
+      function navigateToApp(target) {
+        const active = getActiveScreen();
+        if (target === 'telepon') {
+          showScreen('screen-telepon', active, 'left');
+          setTimeout(() => {
+            const el = document.getElementById('services-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 800);
+        } else if (target === 'informasi') {
+          showScreen('screen-informasi', active, 'left');
+        }
+      }
+
+      /** Dari telepon screen → informasi screen */
+      function goToInformasi() {
+        showScreen('screen-informasi', 'screen-telepon', 'left');
+      }
+
+      /** Dari informasi screen → telepon screen */
+      function goToTelepon() {
+        showScreen('screen-telepon', 'screen-informasi', 'right');
+      }
+
+      /** Kembali ke welcome screen */
+      function backToWelcome() {
+        const active = getActiveScreen();
+        showScreen('welcome-screen', active, 'right');
+      }
+
+      // Daftarkan Service Worker untuk PWA & Offline Support
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('[PRACI SIAGA] Service Worker terdaftar:', reg.scope))
+            .catch(err => console.warn('[PRACI SIAGA] Service Worker gagal:', err));
+        });
+      }
+    </script>
+  </body>
+</html>

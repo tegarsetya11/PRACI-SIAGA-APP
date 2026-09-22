@@ -1,0 +1,11 @@
+# Node modules
+node_modules/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Temporary / Scratch
+last_prompt.txt
+*.log

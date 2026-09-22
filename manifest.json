@@ -1,0 +1,39 @@
+{
+  "name": "PRACI SIAGA - Layanan Darurat Terintegrasi",
+  "short_name": "PRACI SIAGA",
+  "description": "Informasi dan Akses Cepat Layanan Darurat Terintegrasi Kecamatan Pracimantoro, Kabupaten Wonogiri.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F0F9FF",
+  "theme_color": "#0284C7",
+  "orientation": "portrait-primary",
+  "lang": "id",
+  "categories": ["utilities", "government", "health"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Panggil Polisi",
+      "url": "./index.html?cat=keamanan",
+      "description": "Akses cepat ke Polsek Pracimantoro"
+    },
+    {
+      "name": "Panggil Ambulans",
+      "url": "./index.html?cat=medis",
+      "description": "Akses cepat ke Ambulans Puskesmas"
+    }
+  ]
+}
