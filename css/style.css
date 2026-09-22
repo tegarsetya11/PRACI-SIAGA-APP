@@ -796,15 +796,74 @@ button {
   transform: translateY(-1px);
 }
 
-.btn-whatsapp {
+.btn-whatsapp,
+.btn-wa-call {
   background: linear-gradient(135deg, #22C55E, #16A34A);
   color: white;
+  text-decoration: none;
 }
 
-.btn-whatsapp:hover {
+.btn-whatsapp:hover,
+.btn-wa-call:hover {
   background: linear-gradient(135deg, #16A34A, #15803D);
   box-shadow: 0 6px 18px rgba(22, 163, 74, 0.4);
   transform: translateY(-1px);
+  color: white;
+}
+
+.btn-wa-report {
+  grid-column: 1 / -1;
+  background: #F0FDF4;
+  color: #15803D;
+  border: 1.5px solid #86EFAC;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 10px 14px;
+  min-height: 42px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-wa-report:hover {
+  background: #DCFCE7;
+  border-color: #4ADE80;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+  transform: translateY(-1px);
+  color: #14532D;
+}
+
+/* WhatsApp Info Row in card body */
+.wa-info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #F0FDF4;
+  border: 1px dashed #86EFAC;
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+
+.wa-info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #16A34A;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.wa-info-number {
+  font-weight: 700;
+  color: #15803D;
+  font-size: 0.88rem;
+  font-family: inherit;
+  flex: 1;
 }
 
 /* Single-button layout when WA not available */
@@ -1302,6 +1361,37 @@ button {
 .btn-panic-call:hover {
   background: #B91C1C;
   transform: scale(1.03);
+}
+
+.panic-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.btn-panic-wa {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #16A34A;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: inherit;
+  transition: var(--transition);
+  white-space: nowrap;
+  min-height: 40px;
+  text-decoration: none;
+}
+
+.btn-panic-wa:hover {
+  background: #15803D;
+  transform: scale(1.03);
+  color: white;
 }
 
 /* ---------- TOAST NOTIFICATIONS ---------- */
