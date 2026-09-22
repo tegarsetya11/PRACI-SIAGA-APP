@@ -17,117 +17,19 @@ function cleanWaNumber(num) {
   return num.replace(/[^0-9]/g, "");
 }
 
-/** Deteksi apakah berjalan di HP / mobile */
-function isMobileDevice() {
-  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-}
-
-/** 
- * Buka WhatsApp:
- * - Di HP: pakai skema deep link whatsapp:// agar langsung membuka aplikasi WhatsApp tanpa halaman web perantara.
- * - Di desktop: pakai https://wa.me/
- */
+/** Buka WhatsApp dengan pesan via wa.me URL */
 function waOpen(waNumber, message = "") {
   const clean = cleanWaNumber(waNumber);
-  
-  // Jika berjalan di dalam aplikasi Android WebView (Wrapper APK)
-  if (window.Android && typeof window.Android.openWhatsApp === 'function') {
-    window.Android.openWhatsApp(clean, message);
-    return;
-  }
-
-  if (isMobileDevice()) {
-    const textParam = message ? `&text=${encodeURIComponent(message)}` : "";
-    window.location.href = `whatsapp://send?phone=${clean}${textParam}`;
-  } else {
-    const textParam = message ? `?text=${encodeURIComponent(message)}` : "";
-    const url = `https://wa.me/${clean}${textParam}`;
-    window.open(url, "_blank", "noopener");
-  }
+  const textParam = message ? `?text=${encodeURIComponent(message)}` : "";
+  const url = `https://wa.me/${clean}${textParam}`;
+  window.open(url, "_blank", "noopener");
 }
 
-/** Buka modal laporan WA (dipertahankan untuk kompatibilitas) */
+/** Buka modal laporan WA */
 function openWhatsApp(serviceId) {
   const service = EMERGENCY_SERVICES.find((s) => s.id === serviceId);
   if (!service || !service.whatsapp) return;
   showWhatsAppModal(service);
-}
-
-/**
- * Laporan cepat langsung ke WhatsApp — tanpa form modal.
- * Di HP (HTTPS): buka file picker foto, lalu kirim via Web Share API.
- * Di desktop/HTTP: langsung buka wa.me dengan pesan otomatis.
- */
-function quickReport(serviceId) {
-  const service = EMERGENCY_SERVICES.find((s) => s.id === serviceId);
-  if (!service || !service.whatsapp) return;
-
-  const now = new Date().toLocaleString('id-ID', {
-    timeZone: 'Asia/Jakarta',
-    day: '2-digit', month: 'long', year: 'numeric',
-    hour: '2-digit', minute: '2-digit',
-  });
-
-  const buildMessage = (withPhoto) => {
-    const gps = userLocation
-      ? `https://maps.google.com/?q=${userLocation.lat},${userLocation.lng}`
-      : '(belum tersedia — mohon sampaikan lokasi Anda)';
-    return `🚨 *LAPORAN DARURAT — PRACI SIAGA* 🚨
-
-📋 *Kepada:* ${service.name}
-📍 *Lokasi GPS:* ${gps}
-📷 *Foto Kejadian:* ${withPhoto ? '✅ Dilampirkan' : 'Tidak ada'}
-⏰ *Waktu:* ${now} WIB
-
-_Pesan dikirim via PRACI SIAGA_
-_Layanan Darurat Terintegrasi Kecamatan Pracimantoro_`;
-  };
-
-  // Cek apakah Web Share API dengan file didukung (HP + HTTPS)
-  const canWebShare = typeof navigator.share === 'function' && typeof navigator.canShare === 'function';
-
-  if (canWebShare) {
-    // Tampilkan file picker untuk pilih foto
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.capture = 'environment'; // buka kamera belakang langsung di HP
-    input.onchange = async () => {
-      const file = input.files && input.files[0];
-      const message = buildMessage(!!file);
-
-      if (file) {
-        const shareData = { title: 'Laporan Darurat PRACI SIAGA', text: message, files: [file] };
-        if (navigator.canShare(shareData)) {
-          try {
-            await navigator.share(shareData);
-            showToast('📎 Foto + pesan laporan berhasil dibagikan ke WhatsApp!', 'success');
-            trackAction('quick_report_with_photo', service.name);
-          } catch (err) {
-            if (err.name !== 'AbortError') {
-              // Fallback — kirim teks saja
-              waOpen(service.whatsapp, message);
-              showToast('Membuka WhatsApp ' + service.name + '...', 'success');
-            }
-          }
-          return;
-        }
-      }
-
-      // Tidak ada foto atau canShare gagal — kirim pesan teks saja
-      waOpen(service.whatsapp, message);
-      showToast('Membuka WhatsApp ' + service.name + '...', 'success');
-      trackAction('quick_report', service.name);
-    };
-    // Trigger file picker — buka galeri/kamera
-    input.click();
-  } else {
-    // Desktop / HTTP — langsung buka wa.me dengan pesan otomatis
-    const message = buildMessage(false);
-    waOpen(service.whatsapp, message);
-    showToast('Membuka WhatsApp ' + service.name + '...', 'success');
-    trackAction('quick_report_desktop', service.name);
-  }
 }
 
 // ============================================================
@@ -158,25 +60,31 @@ function buildActionButtons(s) {
   const clean = cleanWaNumber(s.whatsapp);
 
   const waCallBtn = `
-    <button class="btn btn-wa-call"
-            id="wa-call-${s.id}"
-            aria-label="Buka WhatsApp ${s.name} untuk menelepon"
-            onclick="waOpen('${s.whatsapp}'); trackAction('whatsapp_call','${s.name}')">
+    <a href="https://wa.me/${clean}"
+       target="_blank"
+       rel="noopener"
+       class="btn btn-wa-call"
+       id="wa-call-${s.id}"
+       aria-label="Buka WhatsApp ${s.name} untuk menelepon"
+       onclick="trackAction('whatsapp_call','${s.name}')">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
       </svg>
       Telepon WA
-    </button>`;
+    </a>`;
 
   const waReportBtn = `
     <button class="btn btn-wa-report"
             id="wa-report-${s.id}"
-            aria-label="Lapor Kejadian dan Kirim Foto ke ${s.name} via WhatsApp"
-            onclick="quickReport('${s.id}')">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            aria-label="Lapor Kejadian ke ${s.name} via WhatsApp"
+            onclick="openWhatsApp('${s.id}')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
       </svg>
-      Lapor &amp; Kirim Foto via WA
+      Lapor Kejadian (WA)
     </button>`;
 
   return `
@@ -371,44 +279,7 @@ function showToast(message, type = "success") {
   }, 3200);
 }
 
-// ============================================================
-// FOTO PREVIEW & BATAL (X)
-// ============================================================
 
-/** Tampilkan preview file foto yang dipilih */
-function handlePhotoSelect(e) {
-  const file = e.target.files[0];
-  const container = document.getElementById("photo-preview-container");
-  const img = document.getElementById("photo-preview-img");
-  const nameEl = document.getElementById("photo-file-name");
-  const sizeEl = document.getElementById("photo-file-size");
-
-  if (!file) {
-    if (container) container.classList.add("hidden");
-    return;
-  }
-
-  if (nameEl) nameEl.textContent = file.name;
-  if (sizeEl) sizeEl.textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
-
-  const reader = new FileReader();
-  reader.onload = function (evt) {
-    if (img) img.src = evt.target.result;
-    if (container) container.classList.remove("hidden");
-  };
-  reader.readAsDataURL(file);
-}
-
-/** Hapus/batalkan file foto yang diupload */
-function clearSelectedPhoto() {
-  const photoInput = document.getElementById("wa-photo");
-  const container = document.getElementById("photo-preview-container");
-  const img = document.getElementById("photo-preview-img");
-
-  if (photoInput) photoInput.value = "";
-  if (img) img.src = "";
-  if (container) container.classList.add("hidden");
-}
 
 // ============================================================
 // INTERACTIVE MAP PICKER & REVERSE GEOCODING
@@ -654,9 +525,6 @@ function showWhatsAppModal(service) {
     document.getElementById("wa-location").value = "";
   }
 
-  // Clear photo selection & preview
-  clearSelectedPhoto();
-
   const btnGps = document.getElementById("btn-wa-gps");
   if (btnGps) {
     btnGps.innerHTML = "Lokasi Anda Saat Ini";
@@ -683,7 +551,6 @@ function submitWhatsAppReport() {
   const reporter    = document.getElementById("wa-reporter").value.trim();
   const incident    = document.getElementById("wa-incident").value.trim();
   const location    = document.getElementById("wa-location").value.trim();
-  const photoInput  = document.getElementById("wa-photo");
   const notes       = document.getElementById("wa-notes").value.trim();
 
   // Validasi 3 Wajib Diisi
@@ -705,21 +572,11 @@ function submitWhatsAppReport() {
     return;
   }
 
-  const hasPhoto    = photoInput && photoInput.files && photoInput.files.length > 0;
-  const photoFile   = hasPhoto ? photoInput.files[0] : null;
-
   const now = new Date().toLocaleString("id-ID", {
     timeZone: "Asia/Jakarta",
     day: "2-digit", month: "long", year: "numeric",
     hour: "2-digit", minute: "2-digit",
   });
-
-  let photoText;
-  if (hasPhoto) {
-    photoText = `⚠️ Foto disertakan — lihat foto yang dikirim bersamaan`;
-  } else {
-    photoText = "Tidak ada";
-  }
 
   const message =
 `🚨 *LAPORAN DARURAT — PRACI SIAGA* 🚨
@@ -728,146 +585,16 @@ function submitWhatsAppReport() {
 👤 *Pelapor:* ${reporter}
 🔴 *Jenis Kejadian:* ${incident}
 📍 *Lokasi:* ${location}
-📷 *Foto Kejadian:* ${photoText}
 📝 *Keterangan Tambahan:* ${notes || "-"}
 ⏰ *Waktu:* ${now} WIB
 
 _Pesan ini dikirim via aplikasi PRACI SIAGA_
 _Layanan Darurat Terintegrasi Kecamatan Pracimantoro_`;
 
-  if (hasPhoto) {
-    tryWebShare(waNumber, message, serviceName, photoFile);
-  } else {
-    waOpen(waNumber, message);
-    closeWhatsAppModal();
-    showToast(`Membuka WhatsApp ${serviceName}...`, "success");
-    trackAction("whatsapp_report", serviceName);
-  }
-}
-
-// ============================================================
-// WEB SHARE API + FALLBACK KE MODAL PANDUAN FOTO
-// ============================================================
-
-/**
- * Coba bagikan foto + pesan via Web Share API (native share sheet).
- * Jika tidak didukung (desktop / HTTP) → fallback ke modal panduan foto manual.
- * @param {string}  waNumber    - Nomor WA tujuan (format +62...)
- * @param {string}  message     - Teks pesan laporan
- * @param {string}  serviceName - Nama instansi
- * @param {File}    file        - File foto dari input
- * @param {boolean} skipClose   - Jika true, modal WA sudah ditutup sebelumnya
- */
-function tryWebShare(waNumber, message, serviceName, file, skipClose = false) {
-  const shareData = {
-    title: 'Laporan Darurat PRACI SIAGA',
-    text: message,
-    files: [file],
-  };
-
-  const webShareSupported =
-    typeof navigator.share === 'function' &&
-    typeof navigator.canShare === 'function' &&
-    navigator.canShare(shareData);
-
-  if (webShareSupported) {
-    // ✅ Web Share API didukung — buka share sheet native
-    navigator.share(shareData)
-      .then(() => {
-        if (!skipClose) closeWhatsAppModal();
-        showToast(`📎 Foto + pesan laporan berhasil dibagikan ke WhatsApp!`, "success");
-        trackAction("web_share_api", serviceName);
-      })
-      .catch((err) => {
-        if (err.name === 'AbortError') {
-          // User membatalkan share sheet — kembalikan ke modal panduan
-          showToast("Berbagi dibatalkan.", "error");
-        } else {
-          // Error lain — fallback ke modal panduan
-          showPhotoGuideModal(waNumber, message, serviceName, file);
-        }
-      });
-  } else {
-    // ❌ Tidak didukung (desktop / HTTP) — fallback ke modal panduan
-    showPhotoGuideModal(waNumber, message, serviceName, file);
-  }
-}
-
-/**
- * Tampilkan modal preview foto + instruksi cara melampirkan ke WA.
- * Fallback jika Web Share API tidak tersedia.
- */
-function showPhotoGuideModal(waNumber, message, serviceName, file) {
-  const modal    = document.getElementById("photo-guide-modal");
-  const imgEl    = document.getElementById("pg-preview-img");
-  const nameEl   = document.getElementById("pg-file-name");
-  const sizeEl   = document.getElementById("pg-file-size");
-  const saveBtn  = document.getElementById("pg-save-btn");
-
-  if (!modal) return;
-
-  // Simpan data untuk digunakan saat tombol "Buka WhatsApp" diklik
-  modal.dataset.waNumber    = waNumber;
-  modal.dataset.message     = message;
-  modal.dataset.serviceName = serviceName;
-
-  // Simpan referensi file asli di DOM modal agar bisa diakses saat konfirmasi
-  modal._photoFile = file;
-
-  // Tampilkan nama & ukuran file
-  if (nameEl) nameEl.textContent = file.name;
-  if (sizeEl) sizeEl.textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
-
-  // Render preview foto
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    if (imgEl) {
-      imgEl.src = e.target.result;
-      imgEl.dataset.dataUrl = e.target.result;
-    }
-
-    // Siapkan tombol simpan/unduh
-    if (saveBtn) {
-      saveBtn.onclick = function () {
-        const a = document.createElement("a");
-        a.href = e.target.result;
-        a.download = file.name || "foto-laporan.jpg";
-        a.click();
-        showToast("Foto berhasil diunduh ke perangkat Anda 📥", "success");
-      };
-    }
-  };
-  reader.readAsDataURL(file);
-
-  modal.classList.add("modal-visible");
-}
-
-function closePhotoGuideModal() {
-  const modal = document.getElementById("photo-guide-modal");
-  if (modal) modal.classList.remove("modal-visible");
-}
-
-function confirmSendWithPhoto() {
-  const modal       = document.getElementById("photo-guide-modal");
-  const waNumber    = modal.dataset.waNumber;
-  const message     = modal.dataset.message;
-  const serviceName = modal.dataset.serviceName;
-  const imgEl       = document.getElementById("pg-preview-img");
-
-  closePhotoGuideModal();
+  waOpen(waNumber, message);
   closeWhatsAppModal();
-
-  // Jika ada file asli tersimpan di modal, coba Web Share API lagi
-  if (modal._photoFile) {
-    setTimeout(() => tryWebShare(waNumber, message, serviceName, modal._photoFile, true), 200);
-  } else {
-    // Fallback ke wa.me URL saja (tanpa foto)
-    setTimeout(() => {
-      waOpen(waNumber, message);
-      showToast(`Membuka WhatsApp ${serviceName}...`, "success");
-      trackAction("whatsapp_report_with_photo", serviceName);
-    }, 200);
-  }
+  showToast(`Membuka WhatsApp ${serviceName}...`, "success");
+  trackAction("whatsapp_report", serviceName);
 }
 
 // ============================================================
@@ -1115,13 +842,12 @@ function setupCounters() {
 // CLOSE MODAL ON BACKDROP CLICK / ESC
 // ============================================================
 document.addEventListener("click", (e) => {
-  if (e.target.id === "wa-modal")          closeWhatsAppModal();
-  if (e.target.id === "panic-modal")       closePanicModal();
-  if (e.target.id === "photo-guide-modal") closePhotoGuideModal();
+  if (e.target.id === "wa-modal")    closeWhatsAppModal();
+  if (e.target.id === "panic-modal") closePanicModal();
 });
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") { closeWhatsAppModal(); closePanicModal(); closePhotoGuideModal(); }
+  if (e.key === "Escape") { closeWhatsAppModal(); closePanicModal(); }
 });
 
 // ============================================================
