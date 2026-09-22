@@ -1,7 +1,7 @@
 // Service Worker - PRACI SIAGA
 // Caching untuk akses offline nomor darurat
 
-const CACHE_NAME = 'praci-siaga-v9';
+const CACHE_NAME = 'praci-siaga-v10';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

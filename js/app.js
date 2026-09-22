@@ -579,14 +579,15 @@ function submitWhatsAppReport() {
   });
 
   const message =
-`🚨 *LAPORAN DARURAT — PRACI SIAGA* 🚨
+`*LAPORAN DARURAT — PRACI SIAGA*
 
-📋 *Kepada:* ${serviceName}
-👤 *Pelapor:* ${reporter}
-🔴 *Jenis Kejadian:* ${incident}
-📍 *Lokasi:* ${location}
-📝 *Keterangan Tambahan:* ${notes || "-"}
-⏰ *Waktu:* ${now} WIB
+Kepada: ${serviceName}
+
+1. Nama Pelapor: ${reporter}
+2. Jenis Kejadian: ${incident}
+3. Lokasi Kejadian: ${location}
+4. Keterangan Tambahan: ${notes || "-"}
+5. Waktu Laporan: ${now} WIB
 
 _Pesan ini dikirim via aplikasi PRACI SIAGA_
 _Layanan Darurat Terintegrasi Kecamatan Pracimantoro_`;
