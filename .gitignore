@@ -9,3 +9,5 @@ Thumbs.db
 # Temporary / Scratch
 last_prompt.txt
 *.log
+
+.vercel
