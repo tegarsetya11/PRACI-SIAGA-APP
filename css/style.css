@@ -5832,4 +5832,216 @@ body {
   }
 }
 
+/* ============================================================
+   MODAL KONFIRMASI NAVIGASI KEMBALI (HALAMAN INFORMASI)
+   ============================================================ */
+.info-back-modal-box {
+  max-width: 440px;
+  width: 90%;
+  border-radius: 24px;
+  padding: 24px 20px 20px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
+  text-align: center;
+}
+
+.info-back-modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.info-back-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #E0F2FE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0 0;
+}
+
+.info-back-modal-close {
+  background: #F1F5F9;
+  color: #64748B;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.info-back-modal-close:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+}
+
+.info-back-modal-header-text {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.info-back-badge-chip {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0284C7;
+  background: #F0F9FF;
+  border: 1px solid #BAE6FD;
+  border-radius: 9999px;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+}
+
+.info-back-modal-header-text h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.info-back-modal-desc {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.info-back-modal-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.btn-info-choice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+.btn-info-choice:active {
+  transform: scale(0.98);
+}
+
+.btn-info-home {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+
+.btn-info-home:hover {
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45);
+  background: linear-gradient(135deg, #0369A1 0%, #075985 100%);
+}
+
+.btn-info-home .btn-info-choice-sub {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.btn-info-home .btn-info-choice-arrow {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-info-exit {
+  background: #FFF1F2;
+  border-color: #FECDD3;
+  color: #9F1239;
+}
+
+.btn-info-exit:hover {
+  background: #FFE4E6;
+  border-color: #FDA4AF;
+}
+
+.btn-info-exit .btn-info-choice-sub {
+  color: #BE123C;
+}
+
+.btn-info-exit .btn-info-choice-arrow {
+  color: #9F1239;
+}
+
+.btn-info-choice-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-info-exit .btn-info-choice-icon {
+  background: #FFE4E6;
+  color: #E11D48;
+}
+
+.btn-info-choice-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-info-choice-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.btn-info-choice-sub {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  margin-top: 2px;
+}
+
+.btn-info-choice-arrow {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.info-back-modal-footer {
+  text-align: center;
+  padding-top: 4px;
+}
+
+.btn-info-back-cancel {
+  background: none;
+  border: none;
+  color: #64748B;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.btn-info-back-cancel:hover {
+  color: #0F172A;
+  background: #F1F5F9;
+}
+
 

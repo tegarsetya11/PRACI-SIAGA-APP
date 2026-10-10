@@ -3420,9 +3420,71 @@
       </div>
     </div>
 
+    <!-- ===================== MODAL KONFIRMASI KEMBALI HALAMAN INFORMASI ===================== -->
+    <div class="modal-overlay" id="info-back-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="info-back-modal-title">
+      <div class="modal-box info-back-modal-box" role="document">
+        <div class="info-back-modal-top">
+          <div class="info-back-icon-wrap" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 14l-4-4 4-4"/>
+              <path d="M5 10h11a4 4 0 1 1 0 8h-1"/>
+            </svg>
+          </div>
+          <button class="modal-close info-back-modal-close" onclick="closeInformasiBackConfirmModal()" aria-label="Tutup dialog konfirmasi">✕</button>
+        </div>
+
+        <div class="info-back-modal-header-text">
+          <span class="info-back-badge-chip">Konfirmasi Navigasi</span>
+          <h3 id="info-back-modal-title">Tinggalkan Halaman Informasi?</h3>
+          <p class="info-back-modal-desc">
+            Anda menekan tombol navigasi kembali pada Halaman Informasi Penting. Silakan pilih tujuan Anda:
+          </p>
+        </div>
+
+        <div class="info-back-modal-options">
+          <!-- Pilihan 1: Kembali ke Beranda -->
+          <button type="button" class="btn-info-choice btn-info-home" id="btn-info-back-home" onclick="confirmNavHome()">
+            <div class="btn-info-choice-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div class="btn-info-choice-text">
+              <span class="btn-info-choice-title">Kembali ke Beranda</span>
+              <span class="btn-info-choice-sub">Menuju menu utama aplikasi PRACI SIAGA</span>
+            </div>
+            <div class="btn-info-choice-arrow" aria-hidden="true">➔</div>
+          </button>
+
+          <!-- Pilihan 2: Keluar dari Aplikasi -->
+          <button type="button" class="btn-info-choice btn-info-exit" id="btn-info-back-exit" onclick="confirmNavExit()">
+            <div class="btn-info-choice-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </div>
+            <div class="btn-info-choice-text">
+              <span class="btn-info-choice-title">Keluar dari Aplikasi</span>
+              <span class="btn-info-choice-sub">Tutup dan keluar dari aplikasi</span>
+            </div>
+            <div class="btn-info-choice-arrow" aria-hidden="true">➔</div>
+          </button>
+        </div>
+
+        <div class="info-back-modal-footer">
+          <button type="button" class="btn-info-back-cancel" onclick="closeInformasiBackConfirmModal()">
+            Tetap di Halaman Informasi
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- ===================== SCRIPTS ===================== -->
-    <script src="js/data.js?v=32"></script>
-    <script src="js/app.js?v=32"></script>
+    <script src="js/data.js?v=33"></script>
+    <script src="js/app.js?v=33"></script>
     <script>
       // ============================================================
       // NAVIGASI MULTI-LAYAR
@@ -3473,6 +3535,47 @@
         closeHelpcenterModal();
         const msg = 'Halo, saya ingin menghubungi Help Center PRACI SIAGA. Mohon bantuannya!';
         window.open('https://wa.me/628895643235?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      }
+
+      /** Buka Modal Konfirmasi Tombol Kembali di Halaman Informasi */
+      function openInformasiBackConfirmModal() {
+        const modal = document.getElementById('info-back-confirm-modal');
+        if (!modal) return;
+        modal.classList.add('modal-visible');
+        document.body.style.overflow = 'hidden';
+      }
+
+      /** Tutup Modal Konfirmasi Tombol Kembali di Halaman Informasi */
+      function closeInformasiBackConfirmModal() {
+        const modal = document.getElementById('info-back-confirm-modal');
+        if (!modal) return;
+        modal.classList.remove('modal-visible');
+        document.body.style.overflow = '';
+      }
+
+      /** Pilihan 1: Kembali ke Beranda */
+      function confirmNavHome() {
+        closeInformasiBackConfirmModal();
+        backToWelcome(true);
+      }
+
+      /** Pilihan 2: Keluar dari Aplikasi */
+      function confirmNavExit() {
+        closeInformasiBackConfirmModal();
+        // Cek jembatan Android bawaan APK
+        if (typeof AndroidBridge !== 'undefined' && AndroidBridge.exitApp) {
+          AndroidBridge.exitApp();
+          return;
+        }
+        // Fallback untuk browser / PWA
+        try {
+          window.close();
+        } catch(e) {}
+        if (window.history && window.history.length > 1) {
+          window.history.back();
+        } else {
+          backToWelcome(true);
+        }
       }
 
       function showScreen(targetId, fromId, direction) {
@@ -3586,14 +3689,21 @@
 
       /** Handler khusus untuk tombol navigasi kembali di ponsel */
       window.handleAndroidBackPressed = function() {
-        // 1. Tutup modal Help Center jika sedang terbuka
+        // 1. Jika modal konfirmasi info sedang terbuka, tutup modal tersebut (batal)
+        const infoModal = document.getElementById('info-back-confirm-modal');
+        if (infoModal && infoModal.classList.contains('modal-visible')) {
+          closeInformasiBackConfirmModal();
+          return true;
+        }
+
+        // 2. Tutup modal Help Center jika sedang terbuka
         const helpModal = document.getElementById('helpcenter-confirm-modal');
         if (helpModal && helpModal.classList.contains('modal-visible')) {
           closeHelpcenterModal();
           return true;
         }
 
-        // 2. Tutup modal WhatsApp jika sedang terbuka
+        // 3. Tutup modal WhatsApp jika sedang terbuka
         const waModal = document.getElementById('wa-modal');
         if (waModal && (waModal.classList.contains('open') || waModal.classList.contains('modal-visible') || waModal.style.display === 'flex' || waModal.style.display === 'block')) {
           if (typeof closeWhatsAppModal === 'function') {
@@ -3602,21 +3712,56 @@
           }
         }
 
-        // 3. Jika sedang di layar telepon atau informasi, kembali ke beranda
+        // 4. Tutup modal preview gambar jika sedang terbuka
+        const imgModal = document.getElementById('img-preview-modal');
+        if (imgModal && imgModal.classList.contains('modal-visible')) {
+          if (typeof closeImagePreview === 'function') {
+            closeImagePreview();
+            return true;
+          }
+        }
+
+        // 5. Cek layar aktif
         const active = getActiveScreen();
-        if (active && active !== 'welcome-screen') {
+
+        // JIKA DI LAYAR INFORMASI -> TAMPILKAN MODAL KONFIRMASI (2 PILIHAN: BERANDA ATAU KELUAR)
+        if (active === 'screen-informasi') {
+          openInformasiBackConfirmModal();
+          return true;
+        }
+
+        // JIKA DI LAYAR TELEPON -> KEMBALI KE BERANDA
+        if (active === 'screen-telepon') {
           backToWelcome(true);
           return true;
         }
 
-        // 4. Jika sudah di beranda, kembalikan false agar Android dapat keluar aplikasi
+        // 6. Jika sudah di beranda, kembalikan false agar Android dapat memproses double press untuk keluar
         return false;
       };
 
-      // Dengarkan event popstate (tombol back browser)
+      // Dengarkan event popstate (tombol back browser / gesture swipe back)
       window.addEventListener('popstate', (e) => {
-        const state = e.state;
         const active = getActiveScreen();
+
+        // Jika modal konfirmasi info sedang terbuka, tutup
+        const infoModal = document.getElementById('info-back-confirm-modal');
+        if (infoModal && infoModal.classList.contains('modal-visible')) {
+          closeInformasiBackConfirmModal();
+          return;
+        }
+
+        // Jika pengguna berada di halaman informasi dan menekan kembali
+        if (active === 'screen-informasi') {
+          // Push state kembali agar tetap di informasi dan buka modal konfirmasi
+          if (window.history && window.history.pushState) {
+            window.history.pushState({ screen: 'informasi' }, '', '#informasi');
+          }
+          openInformasiBackConfirmModal();
+          return;
+        }
+
+        const state = e.state;
         if (state && state.screen === 'telepon') {
           if (active !== 'screen-telepon') showScreen('screen-telepon', active, 'right');
         } else if (state && state.screen === 'informasi') {
