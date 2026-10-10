@@ -3740,44 +3740,80 @@
         return false;
       };
 
-      // Dengarkan event popstate (tombol back browser / gesture swipe back)
+      // Inisialisasi Baseline History Trap saat pertama kali aplikasi dimuat
+      // Mencegah browser/TWA/PWA langsung keluar saat tombol back HP ditekan
+      (function initHistoryBaseline() {
+        if (window.history && window.history.pushState) {
+          const currentHash = window.location.hash || '';
+          if (!currentHash) {
+            window.history.replaceState({ screen: 'welcome', baseline: true }, '', window.location.href);
+            window.history.pushState({ screen: 'welcome' }, '', window.location.href);
+          }
+        }
+      })();
+
+      // Dengarkan event popstate (tombol back di browser, PWA, atau TWA Android)
       window.addEventListener('popstate', (e) => {
-        const active = getActiveScreen();
-
-        // Jika modal konfirmasi info sedang terbuka, tutup
-        const infoModal = document.getElementById('info-back-confirm-modal');
-        if (infoModal && infoModal.classList.contains('modal-visible')) {
-          closeInformasiBackConfirmModal();
-          return;
-        }
-
-        // Jika pengguna berada di halaman informasi dan menekan kembali
-        if (active === 'screen-informasi') {
-          // Push state kembali agar tetap di informasi dan buka modal konfirmasi
-          if (window.history && window.history.pushState) {
-            window.history.pushState({ screen: 'informasi' }, '', '#informasi');
+        // Coba tangani dengan fungsi back sentral kami
+        const handled = window.handleAndroidBackPressed();
+        if (handled) {
+          // Kembalikan history state agar tombol back berikutnya tetap bisa ditangkap
+          const active = getActiveScreen();
+          if (active === 'screen-informasi') {
+            if (window.history && window.history.pushState) {
+              window.history.pushState({ screen: 'informasi' }, '', '#informasi');
+            }
+          } else if (active === 'screen-telepon') {
+            if (window.history && window.history.pushState) {
+              window.history.pushState({ screen: 'telepon' }, '', '#telepon');
+            }
           }
-          openInformasiBackConfirmModal();
           return;
         }
 
-        const state = e.state;
-        if (state && state.screen === 'telepon') {
-          if (active !== 'screen-telepon') showScreen('screen-telepon', active, 'right');
-        } else if (state && state.screen === 'informasi') {
-          if (active !== 'screen-informasi') showScreen('screen-informasi', active, 'right');
+        // Jika sudah di beranda dan tidak ada modal:
+        const now = Date.now();
+        if (window._lastWebBackPress && (now - window._lastWebBackPress < 2000)) {
+          // Double back press terkonfirmasi
+          if (typeof AndroidBridge !== 'undefined' && AndroidBridge.exitApp) {
+            AndroidBridge.exitApp();
+          } else {
+            // Biarkan keluar
+          }
         } else {
-          if (active !== 'welcome-screen') {
-            backToWelcome(false);
+          window._lastWebBackPress = now;
+          if (window.history && window.history.pushState) {
+            window.history.pushState({ screen: 'welcome' }, '', window.location.pathname);
           }
+          showWebBackToast('Tekan sekali lagi untuk keluar dari aplikasi');
         }
       });
 
-      // Daftarkan Service Worker untuk PWA & Offline Support
+      function showWebBackToast(msg) {
+        let toast = document.getElementById('web-back-toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'web-back-toast';
+          toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(15,23,42,0.92);color:#ffffff;padding:10px 22px;border-radius:9999px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);pointer-events:none;transition:opacity 0.25s;opacity:0;text-align:center;max-width:90%;';
+          document.body.appendChild(toast);
+        }
+        toast.textContent = msg;
+        toast.style.opacity = '1';
+        clearTimeout(window._webToastTimer);
+        window._webToastTimer = setTimeout(() => {
+          if (toast) toast.style.opacity = '0';
+        }, 2000);
+      }
+
+      // Daftarkan Service Worker untuk PWA & Offline Support dengan Auto-Update
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('[PRACI SIAGA] Service Worker terdaftar:', reg.scope))
+          navigator.serviceWorker.register('./sw.js?v=34')
+            .then(reg => {
+              console.log('[PRACI SIAGA] Service Worker terdaftar:', reg.scope);
+              // Paksa cek update ke server Vercel
+              reg.update();
+            })
             .catch(err => console.warn('[PRACI SIAGA] Service Worker gagal:', err));
         });
       }
