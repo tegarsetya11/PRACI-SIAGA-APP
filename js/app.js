@@ -89,12 +89,12 @@ function buildActionButtons(s) {
     <a href="tel:${s.phoneRaw}"
        class="btn btn-call"
        id="call-${s.id}"
-       aria-label="Panggil telepon biasa ${s.name}"
+       aria-label="Panggil telepon seluler ${s.name}"
        onclick="trackAction('call','${s.name}')">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
       </svg>
-      Telepon Biasa
+      Telepon Seluler
     </a>`;
 
   if (!s.whatsapp) {
@@ -1338,7 +1338,7 @@ function playTing() {
 
 /**
  * Memainkan suara lonceng "Tung" yang bulat, hangat, dan mantap
- * saat menekan tombol telepon biasa atau telepon WA
+ * saat menekan tombol telepon seluler atau telepon WA
  */
 function playCallTung() {
   try {
@@ -1414,7 +1414,7 @@ document.addEventListener('click', (e) => {
     return;
   }
 
-  // 2. Tombol panggilan telepon biasa / telepon WA / laporan WA
+  // 2. Tombol panggilan telepon seluler / telepon WA / laporan WA
   const callBtn = e.target.closest('a[href^="tel:"], .btn-call, .btn-wa-call, .btn-panic-call, .prabu-btn-wa, .prabu-wa-btn, .prabu-btn-chat');
   if (callBtn) {
     playCallTung();
