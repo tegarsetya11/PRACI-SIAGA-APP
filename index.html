@@ -3500,6 +3500,13 @@
           setTimeout(() => to.classList.remove(inClass), 400);
         }
 
+        // Beritahu Android (via JavascriptInterface) layar mana yang sedang aktif
+        try {
+          if (typeof AndroidBridge !== 'undefined' && AndroidBridge.setCurrentScreen) {
+            AndroidBridge.setCurrentScreen(targetId);
+          }
+        } catch(e) {}
+
         // Update FAB visibility after transition
         setTimeout(() => updateFabVisibility(targetId), 380);
       }
