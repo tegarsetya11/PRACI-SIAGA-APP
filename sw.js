@@ -1,7 +1,7 @@
 // Service Worker - PRACI SIAGA
 // Caching untuk akses offline nomor darurat
 
-const CACHE_NAME = 'praci-siaga-v11';
+const CACHE_NAME = 'praci-siaga-v32';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -10,6 +10,13 @@ const ASSETS_TO_CACHE = [
   './js/app.js',
   './manifest.json',
   './assets/logo.jpg',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './assets/icons/apple-touch-icon.png',
+  './assets/icons/icon-maskable-192.png',
+  './assets/icons/icon-maskable-512.png',
+  './assets/logo-prabu.png',
+  './assets/cs-service.png',
   './assets/pin-lokasi.png',
   './assets/centang-hijau.png',
   './assets/telepon.png',
@@ -29,6 +36,7 @@ const ASSETS_TO_CACHE = [
   './assets/banners/banner-5.jpg',
   './assets/banners/banner-6.jpg',
   './assets/banners/banner-7.png',
+  './assets/banners/banner-prabu.png',
 ];
 
 // Install: Cache semua aset utama

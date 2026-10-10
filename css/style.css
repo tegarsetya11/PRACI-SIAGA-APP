@@ -951,6 +951,148 @@ button {
   color: #14532D;
 }
 
+/* Multi-contact card & button styles (Relawan PRABU) */
+.btn-with-sub {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+.btn-col-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.15;
+}
+
+.btn-main-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.btn-sub-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0.95;
+  letter-spacing: 0.02em;
+  background: rgba(0, 0, 0, 0.16);
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-top: 2px;
+  text-transform: capitalize;
+}
+
+.contacts-grid-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.contact-card-sub {
+  background: #FFFDF7;
+  border: 1.5px solid #FDE68A;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  transition: var(--transition);
+}
+
+.contact-card-sub:hover {
+  border-color: #F59E0B;
+  box-shadow: 0 4px 16px rgba(217, 119, 6, 0.12);
+}
+
+.contact-sub-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #FDE68A;
+}
+
+.contact-badge-mini {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #FEF3C7;
+  color: #B45309;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+.contact-name-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.contact-phone-preview {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #D97706;
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.prabu-actions {
+  margin-top: 4px;
+}
+
+/* --- Layout 2 kolom Relawan PRABU (baru) --- */
+.prabu-contacts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.prabu-contact-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* Tombol Telepon WA — penuh */
+.prabu-wa-btn {
+  width: 100%;
+  padding: 11px 10px;
+  font-size: 0.875rem;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Label nama — persis di bawah tombol WA */
+.prabu-contact-name {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #92400E;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+  border-top: none;
+  padding: 3px 8px 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Tombol Lapor Kejadian — di bawah label nama */
+.prabu-report-btn {
+  width: 100%;
+  grid-column: unset !important;
+  padding: 8px 8px;
+  font-size: 0.78rem;
+  min-height: 38px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm) !important;
+  margin-top: 6px;
+}
+
 /* WhatsApp Info Row in card body */
 .wa-info-row {
   display: flex;
@@ -3476,12 +3618,17 @@ button {
 
 .pkm-sub-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   margin-bottom: 14px;
 }
 
 .pkm-sub-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  flex-shrink: 0;
   font-size: 0.72rem;
   font-weight: 800;
   color: #FFFFFF;
@@ -3490,6 +3637,7 @@ button {
   border-radius: 6px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  margin-top: 1px;
 }
 
 .pkm-sub-title {
@@ -4402,3 +4550,1286 @@ button {
     grid-column: span 1;
   }
 }
+/* --- Layout 2 kolom Relawan PRABU --- */
+.prabu-contacts-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.prabu-contact-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.prabu-wa-btn {
+  width: 100%;
+  padding: 10px 8px;
+  font-size: 0.82rem;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+  margin: 0 !important;
+  justify-content: center;
+}
+
+.prabu-contact-name {
+  display: block;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #92400E;
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+  border-top: none;
+  padding: 3px 6px 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.prabu-report-btn {
+  width: 100%;
+  padding: 7px 6px;
+  font-size: 0.74rem;
+  min-height: 36px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm) !important;
+  margin-top: 5px !important;
+  grid-column: unset !important;
+}
+
+/* Override grid-column for report btn inside prabu col */
+.prabu-contact-col .btn-wa-report {
+  grid-column: unset !important;
+  width: 100%;
+}
+
+
+/* ========== PANEL PRABU (INFO LAYANAN) ========== */
+.prabu-info-coord-box {
+  display: flex;
+  gap: 14px;
+  background: #FFFBEB;
+  border: 1.5px solid #FDE68A;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 4px;
+  align-items: flex-start;
+}
+
+.prabu-info-coord-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.prabu-info-coord-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #92400E;
+  margin-bottom: 4px;
+}
+
+.prabu-info-coord-desc {
+  font-size: 0.84rem;
+  color: #78350F;
+  margin: 0 0 8px 0;
+}
+
+.prabu-coord-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.prabu-coord-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+  padding: 2px 10px;
+  border-radius: 100px;
+}
+
+.prabu-section-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #D97706;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.prabu-service-block {
+  background: #FFFDF7;
+  border: 1px solid #FDE68A;
+  border-left: 4px solid #D97706;
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.2s;
+}
+
+.prabu-service-block:hover {
+  box-shadow: 0 3px 12px rgba(217, 119, 6, 0.12);
+}
+
+.prabu-service-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.prabu-service-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #D97706;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.prabu-service-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #78350F;
+}
+
+.prabu-service-list {
+  margin: 0;
+  padding: 0 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prabu-service-list li {
+  font-size: 0.84rem;
+  color: #1E293B;
+  line-height: 1.5;
+}
+
+/* Kontak info grid */
+.prabu-contact-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 400px) {
+  .prabu-contact-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.prabu-contact-info-card {
+  background: #FFFBEB;
+  border: 1.5px solid #FDE68A;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.prabu-contact-info-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #D97706;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prabu-contact-info-name {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.prabu-contact-info-role {
+  font-size: 0.75rem;
+  color: #B45309;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.prabu-contact-info-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #22C55E, #16A34A);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.prabu-contact-info-wa:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+/* Media Sosial */
+.prabu-sosmed-box {
+  background: #F0F9FF;
+  border: 1.5px solid #BAE6FD;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.prabu-sosmed-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0369A1;
+}
+
+.prabu-sosmed-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #0284C7;
+  font-weight: 700;
+  font-size: 0.84rem;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.prabu-sosmed-link:hover {
+  color: #0369A1;
+  text-decoration: underline;
+}
+
+/* Catatan Layanan */
+.prabu-note-box {
+  background: #FFF7ED;
+  border: 1.5px solid #FED7AA;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.prabu-note-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.prabu-note-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #C2410C;
+  margin-bottom: 4px;
+}
+
+.prabu-note-text {
+  font-size: 0.83rem;
+  color: #7C3D0F;
+  margin: 0 0 8px 0;
+  line-height: 1.5;
+}
+
+.prabu-note-sub {
+  font-size: 0.82rem;
+  color: #9A3412;
+  font-style: italic;
+  margin: 6px 0 0 0;
+}
+
+.prabu-emergency-refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.prabu-emref-item {
+  font-size: 0.75rem;
+  background: #FFEDD5;
+  color: #7C2D12;
+  border: 1px solid #FDBA74;
+  padding: 2px 10px;
+  border-radius: 100px;
+}
+
+
+/* ============================================================
+   PRABU Info Panel Styles (Modern Rich Orange Theme)
+   ============================================================ */
+
+/* Banner Card PRABU */
+.prabu-banner {
+  background: linear-gradient(135deg, #C2410C 0%, #EA580C 45%, #F97316 80%, #FB923C 100%) !important;
+  box-shadow: 0 12px 32px rgba(234, 88, 12, 0.28) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+.prabu-banner-logo {
+  background: #ffffff !important;
+  border: 2.5px solid rgba(255, 255, 255, 0.95) !important;
+  border-radius: 20px !important;
+  padding: 8px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16) !important;
+  width: 92px !important;
+  height: 92px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.prabu-banner-logo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+.prabu-badge {
+  background: rgba(255, 255, 255, 0.24) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  color: #ffffff !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Kotak Koordinasi Lintas Instansi */
+.prabu-coord-card {
+  background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+  border: 1.5px solid #FDBA74;
+  border-radius: var(--radius-lg);
+  padding: 22px 26px;
+  margin-bottom: 26px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.08);
+}
+
+.prabu-coord-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.32);
+}
+
+.prabu-coord-content {
+  flex: 1;
+}
+
+.prabu-coord-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #9A3412;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.prabu-coord-text {
+  font-size: 0.88rem;
+  color: #7C2D12;
+  margin: 0 0 12px 0;
+  line-height: 1.55;
+}
+
+.prabu-coord-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.prabu-pill-badge {
+  background: #FFFFFF;
+  color: #C2410C;
+  border: 1px solid #FDBA74;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(234, 88, 12, 0.08);
+}
+
+/* Section Cards Style PRABU */
+.prabu-section-card {
+  background: linear-gradient(180deg, #FFFDFB 0%, #FFFFFF 100%) !important;
+  border: 1.5px solid #FED7AA !important;
+  border-radius: var(--radius-lg);
+  padding: 30px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.06);
+}
+
+.prabu-tag {
+  background: #FFEDD5 !important;
+  color: #C2410C !important;
+  border-color: #FED7AA !important;
+}
+
+.prabu-pill {
+  background: #FFF7ED !important;
+  color: #EA580C !important;
+  border-color: #FFEDD5 !important;
+}
+
+.prabu-section-title {
+  color: #7C2D12 !important;
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+/* Grid Layanan Bagian A */
+.prabu-grid-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.prabu-item-card {
+  background: #FFFFFF;
+  border: 1.5px solid #FFEDD5;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+.prabu-item-card:hover {
+  transform: translateY(-3px);
+  border-color: #FDBA74;
+  box-shadow: 0 8px 24px rgba(234, 88, 12, 0.12);
+}
+
+.prabu-item-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+  border-bottom: 1px solid #FED7AA;
+}
+
+.prabu-item-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.35);
+}
+
+.prabu-item-title-wrap {
+  flex: 1;
+}
+
+.prabu-item-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #7C2D12;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.prabu-item-sub {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #EA580C;
+  display: block;
+  margin-top: 2px;
+}
+
+.prabu-item-list {
+  list-style: none;
+  padding: 14px 16px 16px 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.prabu-item-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.85rem;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.prabu-item-list li::before {
+  content: '•';
+  position: absolute;
+  left: 3px;
+  color: #EA580C;
+  font-size: 1.25rem;
+  line-height: 1;
+  top: -1px;
+}
+
+/* Subheading */
+.prabu-subheading {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #7C2D12;
+  margin: 0 0 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Bagian B - Kontak Relawan */
+.prabu-contacts-wrapper {
+  margin-bottom: 22px;
+}
+
+.prabu-contact-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 12px;
+}
+
+.prabu-person-card {
+  background: #FFFFFF;
+  border: 1.5px solid #FED7AA;
+  border-radius: 14px;
+  padding: 14px 12px;
+  box-shadow: 0 3px 12px rgba(234, 88, 12, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.prabu-person-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.12);
+}
+
+.prabu-person-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.prabu-person-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(234, 88, 12, 0.3);
+}
+
+.prabu-person-meta {
+  flex: 1;
+}
+
+.prabu-person-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0F172A;
+}
+
+.prabu-person-role {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #EA580C;
+  margin: 2px 0 3px;
+}
+
+.prabu-person-phone {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.02em;
+}
+
+.prabu-person-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.prabu-btn-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.prabu-btn-wa {
+  background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+}
+
+.prabu-btn-wa:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  color: #ffffff !important;
+}
+
+.prabu-btn-chat {
+  background: #F0FDF4;
+  color: #166534 !important;
+  border: 1.5px solid #86EFAC;
+}
+
+.prabu-btn-chat:hover {
+  background: #DCFCE7;
+  transform: translateY(-1px);
+  color: #14532D !important;
+}
+
+/* Instagram Box */
+.prabu-ig-banner {
+  background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 60%, #FEF3C7 100%);
+  border: 1.5px solid #FDBA74;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  box-shadow: 0 3px 10px rgba(234, 88, 12, 0.05);
+}
+
+.prabu-ig-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.prabu-ig-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(221, 42, 123, 0.3);
+}
+
+.prabu-ig-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #881337;
+  margin: 0 0 2px 0;
+}
+
+.prabu-ig-desc {
+  font-size: 0.8rem;
+  color: #7C2D12;
+  margin: 0;
+}
+
+.prabu-ig-btn {
+  background: linear-gradient(45deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%);
+  color: #ffffff !important;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 10px rgba(221, 42, 123, 0.28);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.prabu-ig-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  color: #ffffff !important;
+}
+
+/* Disclaimer / Catatan Layanan */
+.prabu-disclaimer-box {
+  background: #FFF7ED;
+  border: 1.5px solid #FED7AA;
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.prabu-disclaimer-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.prabu-disclaimer-body {
+  flex: 1;
+}
+
+.prabu-disclaimer-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #9A3412;
+  margin: 0 0 6px 0;
+}
+
+.prabu-disclaimer-p {
+  font-size: 0.84rem;
+  color: #7C2D12;
+  margin: 0 0 10px 0;
+  line-height: 1.55;
+}
+
+.prabu-instansi-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.prabu-instansi-badge {
+  background: #FFFFFF;
+  color: #9A3412;
+  border: 1px solid #FDBA74;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.prabu-disclaimer-sub {
+  font-size: 0.8rem;
+  color: #C2410C;
+  font-style: italic;
+  margin: 6px 0 0 0;
+}
+
+@media (max-width: 640px) {
+  .prabu-coord-card {
+    flex-direction: column;
+    padding: 18px;
+    gap: 14px;
+  }
+  .prabu-grid-services {
+    grid-template-columns: 1fr;
+  }
+  /* .prabu-contact-cards-grid kept 2-cols */
+  .prabu-ig-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .prabu-ig-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .prabu-disclaimer-box {
+    flex-direction: column;
+  }
+}
+
+
+/* Catatan Lampirkan Foto di Modal WA (Warna Kuning) */
+.form-note-photo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FEF9C3;
+  border: 1.5px solid #FACC15;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-top: 10px;
+  box-shadow: 0 1px 4px rgba(202, 138, 4, 0.12);
+}
+
+.form-note-photo-icon {
+  flex-shrink: 0;
+  color: #CA8A04;
+}
+
+.form-note-photo-text {
+  font-size: 0.81rem;
+  line-height: 1.4;
+  color: #854D0E;
+}
+
+.form-note-photo-text strong {
+  color: #713F12;
+  font-weight: 700;
+}
+
+/* ============================================================
+   FAB - FLOATING WHATSAPP BUTTON (Help Center Praci Siaga)
+   ============================================================ */
+
+.fab-wa-servis {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  /* Hidden by default, shown only on active screens via JS */
+  opacity: 0;
+  transform: scale(0.6) translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fab-wa-servis.fab-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+/* Tooltip label */
+.fab-wa-label {
+  background: #1A1A1A;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 5px 14px 5px 10px;
+  border-radius: 20px 0 0 20px;
+  white-space: nowrap;
+  line-height: 1.3;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(4px);
+  transition: max-width 0.35s ease, opacity 0.25s ease, transform 0.3s ease, padding 0.3s ease;
+  pointer-events: none;
+  letter-spacing: 0.01em;
+  margin-right: -6px;
+}
+
+.fab-wa-servis:hover .fab-wa-label,
+.fab-wa-servis:focus .fab-wa-label {
+  max-width: 180px;
+  opacity: 1;
+  transform: translateX(0);
+  padding: 5px 14px 5px 10px;
+}
+
+/* Main circle button */
+.fab-wa-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 4px 14px rgba(2, 148, 199, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.fab-wa-servis:hover .fab-wa-circle,
+.fab-wa-servis:focus .fab-wa-circle {
+  transform: scale(1.08);
+  box-shadow:
+    0 6px 20px rgba(2, 148, 199, 0.55),
+    0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.fab-wa-servis:active .fab-wa-circle {
+  transform: scale(0.95);
+}
+
+.fab-wa-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Notification badge */
+.fab-wa-badge {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
+  background: #EF4444;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #fff;
+  font-family: inherit;
+  animation: fabBadgeBounce 2s ease-in-out infinite;
+}
+
+@keyframes fabBadgeBounce {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+/* Responsive: Smaller on very small screens */
+@media (max-width: 380px) {
+  .fab-wa-servis {
+    bottom: 18px;
+    right: 14px;
+  }
+  .fab-wa-circle {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ============================================================
+   MODAL KONFIRMASI WA HELP CENTER PRACI SIAGA
+   ============================================================ */
+.helpcenter-modal-box {
+  max-width: 430px;
+  border-radius: 24px;
+  padding: 24px 22px 22px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
+}
+
+.helpcenter-modal-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+/* Tombol X Lingkaran Merah & Teks X Putih */
+.helpcenter-modal-box .modal-close,
+.helpcenter-modal-close {
+  background: #EF4444;
+  color: #FFFFFF !important;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.helpcenter-modal-box .modal-close:hover,
+.helpcenter-modal-close:hover {
+  background: #DC2626;
+  color: #FFFFFF !important;
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.5);
+}
+
+.helpcenter-modal-box .modal-close:active,
+.helpcenter-modal-close:active {
+  transform: scale(0.95);
+}
+
+.helpcenter-avatar-wrap {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #0284c7, #38bdf8);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.28);
+}
+
+.helpcenter-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #ffffff;
+  display: block;
+}
+
+.helpcenter-avatar-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 22px;
+  height: 22px;
+  background: #22c55e;
+  color: #ffffff;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.helpcenter-modal-header-text {
+  margin-bottom: 16px;
+}
+
+.helpcenter-badge-chip {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.helpcenter-modal-header-text h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-dark, #0f172a);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+}
+
+.helpcenter-modal-desc {
+  font-size: 0.86rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.helpcenter-info-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.helpcenter-info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.helpcenter-info-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.helpcenter-info-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.helpcenter-phone-num {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+}
+
+.helpcenter-info-divider {
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.helpcenter-msg-box {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: #334155;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 10px;
+  line-height: 1.4;
+}
+
+.helpcenter-modal-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-helpcenter-cancel {
+  flex: 1;
+  padding: 12px 14px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm, 10px);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: var(--transition-fast, all 0.2s ease);
+  font-family: inherit;
+  text-align: center;
+}
+
+.btn-helpcenter-cancel:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.btn-helpcenter-confirm {
+  flex: 1.5;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  border: none;
+  border-radius: var(--radius-sm, 10px);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+  font-family: inherit;
+}
+
+.btn-helpcenter-confirm:hover {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-helpcenter-confirm:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 380px) {
+  .helpcenter-modal-box {
+    padding: 20px 16px;
+  }
+  .btn-helpcenter-confirm,
+  .btn-helpcenter-cancel {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+  }
+}
+
+/* ============================================================
+   MOBILE & PWA OPTIMIZATIONS (ANDROID & IPHONE/IOS)
+   ============================================================ */
+
+/* Mobile Safe Area & Tap Optimizations */
+html, body {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.navbar {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.welcome-screen {
+  padding-top: max(32px, calc(16px + env(safe-area-inset-top, 0px)));
+  padding-bottom: max(32px, calc(20px + env(safe-area-inset-bottom, 0px)));
+}
+
+.fab-wa-servis {
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+@media (max-width: 480px) {
+  .navbar-inner {
+    padding: 0 12px;
+  }
+}
+
+

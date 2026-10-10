@@ -11,8 +11,8 @@ const EMERGENCY_SERVICES = [
     phone: "110",
     phoneDisplay: "110 (Darurat Polri)",
     phoneRaw: "110",
-    whatsapp: "+628895643235", // WA Polsek Pracimantoro
-    phoneAlt: "+62 889-5643-235", // Nomor WA
+    whatsapp: "+6285196201594", // WA Polsek Pracimantoro
+    phoneAlt: "+62 851-9620-1594", // Nomor WA
     description:
       "Penanganan tindak kriminalitas, pencurian, kecelakaan lalu lintas, gangguan ketertiban umum, kekerasan dalam rumah tangga, dan laporan ancaman keamanan di wilayah Kecamatan Pracimantoro.",
     keywords: ["kriminal", "pencurian", "kecelakaan", "polisi", "keamanan", "kdrt", "perkelahian", "maling"],
@@ -83,8 +83,8 @@ const EMERGENCY_SERVICES = [
     categoryLabel: "Medis & Ambulans",
     phone: "0895393319589",
     phoneDisplay: "0895-3933-19589",
-    phoneRaw: "+6289539331958",
-    whatsapp: "+6289539331958",
+    phoneRaw: "+62895393319589",
+    whatsapp: "+62895393319589",
     description:
       "Layanan ambulans darurat 24 jam, pertolongan pertama gawat darurat, dan rujukan pasien. Melayani wilayah kerja Pracimantoro bagian timur dan selatan.",
     keywords: ["ambulans", "ugd", "medis", "dokter", "darurat", "sakit", "kecelakaan", "puskesmas", "praci 2"],
@@ -136,9 +136,9 @@ const EMERGENCY_SERVICES = [
     category: "lalin",
     categoryLabel: "Lalu Lintas & Jalan",
     phone: "(0273) 321147",
-    phoneDisplay: "(0273) 321147",
+    phoneDisplay: "(0273) 321147 / WA: 0811-2707-147",
     phoneRaw: "+62273321147",
-    whatsapp: null,
+    whatsapp: "+628112707147",
     description:
       "Dinas Perhubungan Wonogiri. Gangguan lampu penerangan jalan umum (PJU) mati, rambu lalu lintas rusak/hilang, penertiban kemacetan ekstrem, koordinasi jalur alternatif, serta rekayasa lalu lintas darurat.",
     keywords: ["lampu jalan", "pju", "macet", "rambu", "dishub", "kemacetan", "jalan", "lalin", "mudik", "penerangan"],
@@ -164,6 +164,51 @@ const EMERGENCY_SERVICES = [
     color: "#881337",
     bgColor: "#FFF1F2",
     borderColor: "#FECDD3",
+  },
+  {
+    id: "relawan-prabu",
+    name: "Relawan PRABU (Pracimantoro Bersatu)",
+    shortName: "PRABU",
+    category: "bencana",
+    categoryLabel: "Relawan & Kedaruratan",
+    phone: "0852-9232-3230",
+    phoneDisplay: "0852-9232-3230 / 0878-4154-2664",
+    phoneRaw: "+6285292323230",
+    whatsapp: "+6285292323230",
+    contacts: [
+      {
+        name: "Saryono",
+        phone: "0852-9232-3230",
+        phoneRaw: "+6285292323230",
+        whatsapp: "+6285292323230",
+      },
+      {
+        name: "Rudi",
+        phone: "0878-4154-2664",
+        phoneRaw: "+6287841542664",
+        whatsapp: "+6287841542664",
+      },
+    ],
+    description:
+      "Organisasi Relawan PRABU (Pracimantoro Bersatu). Siaga aksi cepat tanggap bencana alam, evakuasi warga terdampak, penanganan pohon tumbang, bantuan sosial darurat kemanusiaan, dan pertolongan pertama kedaruratan di wilayah Kecamatan Pracimantoro.",
+    keywords: [
+      "relawan",
+      "prabu",
+      "pracimantoro bersatu",
+      "saryono",
+      "rudi",
+      "bencana",
+      "evakuasi",
+      "pohon tumbang",
+      "longsor",
+      "banjir",
+      "siaga",
+      "pertolongan",
+    ],
+    icon: `<img src="assets/logo-prabu.png" alt="Logo Relawan PRABU" class="service-logo-img" />`,
+    color: "#D97706",
+    bgColor: "#FFFBEB",
+    borderColor: "#FDE68A",
   },
 ];
 

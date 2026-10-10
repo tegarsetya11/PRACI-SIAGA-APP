@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "id.pracisiaga.app",
+      "sha256_cert_fingerprints": [
+        "D6:00:8E:A5:91:D1:C8:FE:B0:FF:E8:5C:6E:C2:3B:24:03:79:53:43:21:54:FA:CA:D1:43:E4:BD:A6:B0:6C:CE",
+        "B7:FA:4B:77:C3:C7:FE:5D:5D:6B:61:3B:EE:51:02:09:4A:4A:65:05:A8:90:0F:4E:51:56:F2:C5:A9:14:34:71"
+      ]
+    }
+  }
+]

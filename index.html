@@ -2,13 +2,10 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0284C7" />
-    <meta
-      name="description"
-      content="PRACI SIAGA - Informasi dan Akses Cepat Layanan Darurat Terintegrasi Kecamatan Pracimantoro, Kabupaten Wonogiri. Hubungi Polsek, Damkar, Ambulans, BPBD, SAR, DISHUB, dan PMI dalam satu klik."
-    />
-    <meta name="keywords" content="darurat, pracimantoro, wonogiri, polisi, damkar, ambulans, bpbd, sar, pmi, layanan darurat" />
+    <meta name="description" content="PRACI SIAGA - Informasi dan Akses Cepat Layanan Darurat Terintegrasi Kecamatan Pracimantoro, Kabupaten Wonogiri. Hubungi Polsek, Damkar, Ambulans, BPBD, SAR, DISHUB, dan PMI dalam satu klik." />
+    <meta name="keywords" content="darurat, pracimantoro, wonogiri, polisi, damkar, ambulans, bpbd, sar, pmi, layanan darurat, pwa mobile" />
     <meta name="author" content="Pemerintah Kecamatan Pracimantoro" />
 
     <!-- Open Graph -->
@@ -16,18 +13,35 @@
     <meta property="og:description" content="Akses cepat nomor darurat Pracimantoro & Wonogiri dalam satu aplikasi." />
     <meta property="og:type" content="website" />
 
+    <!-- iOS / Apple Mobile Web App Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="PRACI SIAGA" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="assets/icons/icon-512.png" />
+
+    <!-- Android & Standard PWA Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/icon-512.png" />
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-TileColor" content="#0284C7" />
+    <meta name="msapplication-TileImage" content="assets/icons/icon-192.png" />
+
     <title>PRACI SIAGA - Layanan Darurat Terintegrasi Pracimantoro</title>
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json" />
-    <link rel="apple-touch-icon" href="assets/icons/icon-192.svg" />
 
     <!-- Leaflet CSS & JS for Interactive Map Picker -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=32" />
   </head>
 
   <body>
@@ -110,7 +124,7 @@
         </div>
 
         <!-- Footer kecil -->
-        <p class="welcome-footer-note">© 2026 PRACI SIAGA · Hak Cipta Dilindungi · TEGAR.S.A</p>
+        <p class="welcome-footer-note">© 2026 PRACI SIAGA · Hak Cipta Dilindungi · TegarSetya.A</p>
       </div>
     </div>
 
@@ -126,7 +140,7 @@
             </div>
             <div class="navbar-title">PRACI SIAGA</div>
           </a>
-          <!-- 2 TAB NAVIGASI -->
+          <!-- TAB NAVIGASI -->
           <div class="navbar-tabs" role="navigation" aria-label="Menu navigasi">
             <button class="nav-tab" id="tab-beranda" onclick="backToWelcome()" aria-label="Kembali ke Beranda">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -162,6 +176,8 @@
               <div class="banner-slide"><img src="assets/banners/banner-5.jpg" alt="SAR Wonogiri" loading="lazy" /></div>
               <div class="banner-slide"><img src="assets/banners/banner-6.jpg" alt="DISHUB Wonogiri" loading="lazy" /></div>
               <div class="banner-slide"><img src="assets/banners/banner-7.png" alt="PMI Wonogiri" loading="lazy" /></div>
+              <div class="banner-slide"><img src="assets/banners/banner-prabu.png" alt="Relawan PRABU (Pracimantoro Bersatu)" loading="lazy" /></div>
+
             </div>
             <!-- Dot indicator -->
             <div class="banner-dots" id="banner-dots" aria-label="Panel indikator">
@@ -172,13 +188,14 @@
               <button class="banner-dot" data-idx="4" aria-label="Panel 5"></button>
               <button class="banner-dot" data-idx="5" aria-label="Panel 6"></button>
               <button class="banner-dot" data-idx="6" aria-label="Panel 7"></button>
+              <button class="banner-dot" data-idx="7" aria-label="Panel 8: Relawan PRABU"></button>
             </div>
           </div>
 
           <!-- Stats polos di bawah banner — tanpa panel -->
           <div class="hero-stats-plain" role="list" aria-label="Statistik layanan">
             <div class="stat-plain-item" role="listitem">
-              <span class="stat-plain-number" data-count="9" data-suffix="" id="stat-instansi">9</span>
+              <span class="stat-plain-number" data-count="10" data-suffix="" id="stat-instansi">10</span>
               <span class="stat-plain-label">Instansi Darurat</span>
             </div>
             <div class="stat-plain-sep" aria-hidden="true"></div>
@@ -243,7 +260,7 @@
             </p>
             <div class="footer-divider-simple"></div>
             <p class="footer-copyright-text">
-              &copy; 2026 PRACI SIAGA &middot; Hak Cipta Dilindungi &middot; TEGAR.S.A
+              &copy; 2026 PRACI SIAGA &middot; Hak Cipta Dilindungi &middot; TegarSetya.A
             </p>
           </div>
         </div>
@@ -298,6 +315,15 @@
                 4. Keterangan Tambahan <span style="color:var(--gray-600);font-weight:500;">(Opsional)</span>
               </label>
               <textarea class="form-control" id="wa-notes" rows="3" placeholder="Kondisi korban, perkiraan jumlah orang terdampak, rincian bantuan..."></textarea>
+              <div class="form-note-photo">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="form-note-photo-icon" aria-hidden="true">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                <div class="form-note-photo-text">
+                  <strong>Catatan:</strong> Lampirkan foto kejadian saat WhatsApp sudah terbuka (bila ada).
+                </div>
+              </div>
             </div>
 
             <!-- Tombol Kirim via WhatsApp -->
@@ -358,11 +384,11 @@
             <div class="panic-service-item" role="listitem">
               <div>
                 <div class="panic-service-name">🛡️ Polsek Pracimantoro</div>
-                <div class="panic-service-number">110 / WA: 0889-5643-235</div>
+                <div class="panic-service-number">110 / WA: 0851-9620-1594</div>
               </div>
               <div class="panic-actions">
                 <a href="tel:110" class="btn-panic-call" aria-label="Telepon Polsek 110"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> 110</a>
-                <a href="https://wa.me/628895643235" target="_blank" rel="noopener" class="btn-panic-wa" aria-label="Telepon WA Polsek Pracimantoro">💬 WA</a>
+                <a href="https://wa.me/6285196201594" target="_blank" rel="noopener" class="btn-panic-wa" aria-label="Telepon WA Polsek Pracimantoro">💬 WA</a>
               </div>
             </div>
 
@@ -406,11 +432,11 @@
             <div class="panic-service-item" role="listitem">
               <div>
                 <div class="panic-service-name">🚑 Ambulans Puskesmas 2</div>
-                <div class="panic-service-number">0895-3933-19589 / WA: 0895-3933-1958</div>
+                <div class="panic-service-number">0895-3933-19589</div>
               </div>
               <div class="panic-actions">
-                <a href="tel:+6289539331958" class="btn-panic-call" aria-label="Telepon Puskesmas 2"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
-                <a href="https://wa.me/6289539331958" target="_blank" rel="noopener" class="btn-panic-wa" aria-label="Telepon WA Puskesmas 2">💬 WA</a>
+                <a href="tel:+62895393319589" class="btn-panic-call" aria-label="Telepon Puskesmas 2"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+                <a href="https://wa.me/62895393319589" target="_blank" rel="noopener" class="btn-panic-wa" aria-label="Telepon WA Puskesmas 2">💬 WA</a>
               </div>
             </div>
 
@@ -454,9 +480,26 @@
             <div class="panic-service-item" role="listitem">
               <div>
                 <div class="panic-service-name">🚦 DISHUB Wonogiri</div>
-                <div class="panic-service-number">(0273) 321147</div>
+                <div class="panic-service-number">(0273) 321147 / WA: 0811-2707-147</div>
               </div>
-              <a href="tel:+62273321147" class="btn-panic-call" aria-label="Telepon DISHUB"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+              <div class="panic-actions">
+                <a href="tel:+62273321147" class="btn-panic-call" aria-label="Telepon DISHUB"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Panggil</a>
+                <a href="https://wa.me/628112707147" target="_blank" rel="noopener" class="btn-panic-wa" aria-label="Kirim Laporan WA DISHUB">💬 WA</a>
+              </div>
+            </div>
+
+            <!-- Relawan PRABU -->
+            <div class="panic-service-item" role="listitem">
+              <div>
+                <div class="panic-service-name">🤝 Relawan PRABU</div>
+                <div class="panic-service-number">0852-9232-3230 (Saryono) / 0878-4154-2664 (Rudi)</div>
+              </div>
+              <div class="panic-actions">
+                <a href="tel:+6285292323230" class="btn-panic-call" aria-label="Telepon Relawan PRABU Saryono"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Saryono</a>
+                <a href="tel:+6287841542664" class="btn-panic-call" aria-label="Telepon Relawan PRABU Rudi"><img src="assets/telepon.png" alt="" class="phone-icon-sm" /> Rudi</a>
+                <a href="https://wa.me/6285292323230" target="_blank" rel="noopener" class="btn-panic-wa" aria-label="Telepon WA Saryono">💬 WA Saryono</a>
+                <a href="https://wa.me/6287841542664" target="_blank" rel="noopener" class="btn-panic-wa" aria-label="Telepon WA Rudi">💬 WA Rudi</a>
+              </div>
             </div>
 
             <!-- Darurat Nasional 112 -->
@@ -567,6 +610,13 @@
               <span class="info-topic-text">
                 <span class="info-topic-title">INFORMASI LAYANAN PMI WONOGIRI</span>
                 <span class="info-topic-desc">Donor darah, ambulans &amp; bantuan kemanusiaan</span>
+              </span>
+            </button>
+            <button class="info-topic-btn" id="tab-topic-prabu" onclick="selectInfoTopic('prabu')" role="tab" aria-selected="false" aria-controls="panel-topic-prabu">
+              <span class="info-topic-num">8</span>
+              <span class="info-topic-text">
+                <span class="info-topic-title">INFORMASI LAYANAN RELAWAN PRABU</span>
+                <span class="info-topic-desc">Pracimantoro Bersatu — kebencanaan &amp; sosial</span>
               </span>
             </button>
           </div>
@@ -1119,7 +1169,7 @@
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     </div>
                     <div class="pkm-acc-btn-text">
-                      <span class="pkm-acc-btn-title">Layanan PUSKESMAS 1 Pracimantoro</span>
+                      <span class="pkm-acc-btn-title">Layanan PUSKESMAS Pracimantoro 1</span>
                       <span class="pkm-acc-btn-sub">UPTD Puskesmas Pracimantoro I &mdash; Integrasi Layanan Primer (ILP)</span>
                     </div>
                   </div>
@@ -1130,7 +1180,7 @@
                   <!-- BAGIAN A -->
                   <div class="pkm-sub-section">
                     <div class="pkm-sub-header">
-                      <span class="pkm-sub-tag">BAGIAN A</span>
+                      <span class="pkm-sub-tag" style="white-space:nowrap; flex-shrink:0;">BAGIAN A</span>
                       <h4 class="pkm-sub-title">Jenis Layanan</h4>
                     </div>
 
@@ -1197,7 +1247,7 @@
                   <!-- BAGIAN B: Jejaring -->
                   <div class="pkm-sub-section" style="margin-top:16px;">
                     <div class="pkm-sub-header">
-                      <span class="pkm-sub-tag" style="background:#b45309;">BAGIAN B</span>
+                      <span class="pkm-sub-tag" style="background:#b45309; white-space:nowrap; flex-shrink:0;">BAGIAN B</span>
                       <h4 class="pkm-sub-title">Jejaring &amp; Kemitraan</h4>
                     </div>
                     <div class="pkm-cluster-block">
@@ -1254,7 +1304,7 @@
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     </div>
                     <div class="pkm-acc-btn-text">
-                      <span class="pkm-acc-btn-title">Layanan PUSKESMAS 2 Pracimantoro</span>
+                      <span class="pkm-acc-btn-title">Layanan PUSKESMAS Pracimantoro 2</span>
                       <span class="pkm-acc-btn-sub">UPTD Puskesmas Pracimantoro II &mdash; UKM, UKP, Jaringan &amp; Jejaring</span>
                     </div>
                   </div>
@@ -1263,8 +1313,8 @@
                 <div class="pkm-acc-body" id="pkm-acc-2-body" hidden>
 
                   <div class="pkm-sub-section">
-                    <div class="pkm-sub-header">
-                      <span class="pkm-sub-tag" style="background:#0f766e;">BAGIAN A</span>
+                    <div class="pkm-sub-header" style="display:flex; align-items:flex-start; gap:10px;">
+                      <span class="pkm-sub-tag" style="background:#0f766e; white-space:nowrap; flex-shrink:0;">BAGIAN A</span>
                       <h4 class="pkm-sub-title">Jenis-Jenis Pelayanan di UPTD Puskesmas Pracimantoro II</h4>
                     </div>
 
@@ -2604,6 +2654,37 @@
 
             </div>
 
+            <!-- ================= KONTAK DARURAT DISHUB ================= -->
+            <div class="spkt-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag" style="background:#4338CA;color:#FFFFFF;border-color:#4338CA;">KONTAK</span>
+                  <span class="spkt-section-pill">Telepon & WhatsApp Resmi</span>
+                </div>
+                <h3 class="spkt-section-title">Hubungi DISHUB Wonogiri</h3>
+                <p class="spkt-section-sub">Laporkan gangguan lampu jalan, rambu rusak, kemacetan, atau keperluan koordinasi lalu lintas melalui nomor berikut:</p>
+              </div>
+
+              <div class="info-detail-box" style="margin-top:4px;">
+                <p>
+                  <strong>📞 Telepon Kantor:</strong>
+                  <a href="tel:+62273321147" style="color:#4338CA;font-weight:700;">(0273) 321147</a>
+                </p>
+                <p>
+                  <strong>💬 WhatsApp Darurat:</strong>
+                  <a href="https://wa.me/628112707147" target="_blank" rel="noopener" style="color:#25D366;font-weight:700;">0811-2707-147</a>
+                </p>
+                <p style="margin-top:8px;">
+                  <a href="tel:+62273321147" class="btn-call" style="display:inline-flex;align-items:center;gap:6px;background:#4338CA;color:#fff;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none;margin-right:8px;">
+                    📞 Telepon
+                  </a>
+                  <a href="https://wa.me/628112707147?text=Halo%20DISHUB%20Wonogiri%2C%20saya%20ingin%20melaporkan%20gangguan%20lalu%20lintas%20di%20wilayah%20Pracimantoro.%20Mohon%20bantuannya%20%F0%9F%99%8F" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;padding:8px 16px;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none;">
+                    💬 Kirim Laporan WA
+                  </a>
+                </p>
+              </div>
+            </div>
+
           </div>
           <!-- ================= PANEL 7: LAYANAN PMI WONOGIRI ================= -->
           <div id="panel-topic-pmi" class="info-topic-panel hidden" role="tabpanel" aria-labelledby="tab-topic-pmi">
@@ -2969,7 +3050,272 @@
 
           </div>
 
+        
+          <!-- ================= PANEL 8: INFORMASI LAYANAN RELAWAN PRABU ================= -->
+          <div id="panel-topic-prabu" class="info-topic-panel hidden" role="tabpanel" aria-labelledby="tab-topic-prabu">
+
+            <!-- Banner Card PRABU -->
+            <div class="spkt-banner-card prabu-banner">
+              <div class="spkt-banner-logo prabu-banner-logo">
+                <img src="assets/logo-prabu.png" alt="Logo Relawan PRABU Pracimantoro Bersatu" />
+              </div>
+              <div class="spkt-banner-content">
+                <span class="spkt-badge prabu-badge">RELAWAN MASYARAKAT · KECAMATAN PRACIMANTORO</span>
+                <h2 class="spkt-main-title">8. INFORMASI LAYANAN RELAWAN PRABU (PRACIMANTORO BERSATU)</h2>
+                <p class="spkt-desc">
+                  Relawan Pracimantoro Bersatu (PRABU) merupakan komunitas relawan masyarakat di wilayah Kecamatan Pracimantoro, Kabupaten Wonogiri, yang bergerak dalam bidang kebencanaan, pertolongan, mitigasi, dan kegiatan sosial kemasyarakatan.
+                </p>
+              </div>
+            </div>
+
+            <!-- Koordinasi Lintas Instansi -->
+            <div class="prabu-coord-card">
+              <div class="prabu-coord-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="prabu-coord-content">
+                <h4 class="prabu-coord-title">Koordinasi Lintas Instansi &amp; Komunitas Relawan</h4>
+                <p class="prabu-coord-text">
+                  PRABU dapat menjadi salah satu unsur pendukung dalam penanganan keadaan darurat dan kejadian di lingkungan masyarakat dengan berkoordinasi bersama instansi dan pihak terkait:
+                </p>
+                <div class="prabu-coord-badges">
+                  <span class="prabu-pill-badge">BPBD Wonogiri</span>
+                  <span class="prabu-pill-badge">SAR Wonogiri</span>
+                  <span class="prabu-pill-badge">Damkar Wonogiri</span>
+                  <span class="prabu-pill-badge">TNI / Koramil</span>
+                  <span class="prabu-pill-badge">Polri / Polsek</span>
+                  <span class="prabu-pill-badge">PMI Wonogiri</span>
+                  <span class="prabu-pill-badge">Puskesmas Pracimantoro</span>
+                  <span class="prabu-pill-badge">Pemerintah Desa</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= BAGIAN A: LAYANAN YANG DAPAT DIBANTU ================= -->
+            <div class="spkt-section-card prabu-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag prabu-tag">BAGIAN A</span>
+                  <span class="spkt-section-pill prabu-pill">6 Bidang Layanan Bantuan</span>
+                </div>
+                <h3 class="spkt-section-title prabu-section-title">Layanan yang Dapat Dibantu</h3>
+                <p class="spkt-section-sub">
+                  Ruang lingkup bantuan tanggap bencana, pencarian korban, keselamatan lingkungan, dan kepedulian sosial yang dapat didukung oleh Relawan PRABU di wilayah Pracimantoro:
+                </p>
+              </div>
+
+              <div class="prabu-grid-services">
+                <!-- 1. Penanganan Bencana -->
+                <div class="prabu-item-card">
+                  <div class="prabu-item-header">
+                    <span class="prabu-item-num">1</span>
+                    <div class="prabu-item-title-wrap">
+                      <h4 class="prabu-item-title">Penanganan Bencana</h4>
+                      <span class="prabu-item-sub">Banjir, Genangan &amp; Pascabencana</span>
+                    </div>
+                  </div>
+                  <ul class="prabu-item-list">
+                    <li>Membantu penanganan banjir dan genangan.</li>
+                    <li>Membantu penanganan dampak bencana alam.</li>
+                    <li>Membantu evakuasi masyarakat terdampak sesuai kemampuan dan kondisi lapangan.</li>
+                    <li>Membantu pembersihan area pascabencana.</li>
+                  </ul>
+                </div>
+
+                <!-- 2. Pencarian dan Pertolongan -->
+                <div class="prabu-item-card">
+                  <div class="prabu-item-header">
+                    <span class="prabu-item-num">2</span>
+                    <div class="prabu-item-title-wrap">
+                      <h4 class="prabu-item-title">Pencarian dan Pertolongan</h4>
+                      <span class="prabu-item-sub">Orang Hilang &amp; Support SAR</span>
+                    </div>
+                  </div>
+                  <ul class="prabu-item-list">
+                    <li>Membantu pencarian orang yang hilang atau diduga hilang di darat, kawasan hutan/alas, perbukitan, maupun sungai/luweng.</li>
+                    <li>Mendukung tim SAR resmi dalam operasi pencarian dan evakuasi korban.</li>
+                  </ul>
+                </div>
+
+                <!-- 3. Penanganan Pohon Tumbang & Rintangan Jalan -->
+                <div class="prabu-item-card">
+                  <div class="prabu-item-header">
+                    <span class="prabu-item-num">3</span>
+                    <div class="prabu-item-title-wrap">
+                      <h4 class="prabu-item-title">Penanganan Pohon Tumbang &amp; Rintangan Jalan</h4>
+                      <span class="prabu-item-sub">Evakuasi Pohon &amp; Buka Akses Jalan</span>
+                    </div>
+                  </div>
+                  <ul class="prabu-item-list">
+                    <li>Membantu evakuasi dan pemotongan pohon tumbang yang menutup akses jalan atau menimpa fasilitas warga.</li>
+                    <li>Membantu pembersihan material atau rintangan yang membahayakan pengguna jalan.</li>
+                  </ul>
+                </div>
+
+                <!-- 4. Penanganan Bahaya Hewan / Animal Rescue Ringan -->
+                <div class="prabu-item-card">
+                  <div class="prabu-item-header">
+                    <span class="prabu-item-num">4</span>
+                    <div class="prabu-item-title-wrap">
+                      <h4 class="prabu-item-title">Penanganan Bahaya Hewan / Animal Rescue Ringan</h4>
+                      <span class="prabu-item-sub">Ular Masuk Rumah, Sarang Tawon &amp; Hewan Liar</span>
+                    </div>
+                  </div>
+                  <ul class="prabu-item-list">
+                    <li>Membantu penanganan atau evakuasi ular masuk ke pemukiman warga.</li>
+                    <li>Membantu evakuasi sarang tawon yang membahayakan lingkungan masyarakat.</li>
+                    <li>Membantu pengamanan hewan liar/berbahaya lainnya sesuai kemampuan dan peralatan yang tersedia.</li>
+                  </ul>
+                </div>
+
+                <!-- 5. Dukungan Kegiatan Sosial Kemasyarakatan -->
+                <div class="prabu-item-card">
+                  <div class="prabu-item-header">
+                    <span class="prabu-item-num">5</span>
+                    <div class="prabu-item-title-wrap">
+                      <h4 class="prabu-item-title">Dukungan Kegiatan Sosial Kemasyarakatan</h4>
+                      <span class="prabu-item-sub">Pengamanan Warga &amp; Kemanusiaan</span>
+                    </div>
+                  </div>
+                  <ul class="prabu-item-list">
+                    <li>Membantu kegiatan sosial kemasyarakatan.</li>
+                    <li>Membantu pengamanan dan ketertiban kegiatan masyarakat.</li>
+                    <li>Mendukung kegiatan kemanusiaan dan kebencanaan di wilayah Pracimantoro.</li>
+                  </ul>
+                </div>
+
+                <!-- 6. Mitigasi dan Kesiapsiagaan Bencana -->
+                <div class="prabu-item-card">
+                  <div class="prabu-item-header">
+                    <span class="prabu-item-num">6</span>
+                    <div class="prabu-item-title-wrap">
+                      <h4 class="prabu-item-title">Mitigasi dan Kesiapsiagaan Bencana</h4>
+                      <span class="prabu-item-sub">Pelatihan, Apel &amp; Edukasi Pelajar</span>
+                    </div>
+                  </div>
+                  <ul class="prabu-item-list">
+                    <li>Membantu kegiatan kesiapsiagaan bencana.</li>
+                    <li>Mendukung kegiatan mitigasi risiko bencana.</li>
+                    <li>Berpartisipasi dalam apel, pelatihan, dan kegiatan kebencanaan bersama instansi terkait.</li>
+                    <li>Mengenalkan mitigasi bencana kepada siswa SMA/SMK di wilayah Pracimantoro.</li>
+                    <li>Memberikan edukasi mengenai kesiapsiagaan menghadapi gempa bumi dan banjir.</li>
+                    <li>Meningkatkan pengetahuan dan kesadaran pelajar mengenai tindakan sebelum, saat, dan setelah bencana.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= BAGIAN B: KONTAK & CATATAN LAYANAN ================= -->
+            <div class="spkt-section-card prabu-section-card">
+              <div class="spkt-section-header">
+                <div class="spkt-tag-row">
+                  <span class="spkt-section-tag prabu-tag">BAGIAN B</span>
+                  <span class="spkt-section-pill prabu-pill">Kontak &amp; Prosedur Lapangan</span>
+                </div>
+                <h3 class="spkt-section-title prabu-section-title">Kontak &amp; Catatan Layanan Relawan PRABU</h3>
+                <p class="spkt-section-sub">
+                  Informasi kontak komunikasi darurat langsung, saluran media sosial resmi, dan prosedur koordinasi bersama instansi pemerintah:
+                </p>
+              </div>
+
+              <!-- Dua Kartu Kontak Relawan -->
+              <div class="prabu-contacts-wrapper">
+                <h4 class="prabu-subheading">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Kontak Darurat Relawan PRABU
+                </h4>
+                <div class="prabu-contact-cards-grid">
+                  <!-- Kontak 1: Pak Rudi -->
+                  <div class="prabu-person-card">
+                    <div class="prabu-person-top">
+                      <div class="prabu-person-avatar">R</div>
+                      <div class="prabu-person-meta">
+                        <div class="prabu-person-name">Rudi</div>
+                        <div class="prabu-person-role">Kontak Relawan PRABU</div>
+                        <div class="prabu-person-phone">0878-4154-2664</div>
+                      </div>
+                    </div>
+                    <div class="prabu-person-actions">
+                      <a href="https://wa.me/6287841542664" target="_blank" rel="noopener" class="prabu-btn-action prabu-btn-wa">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.59-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.882-4.434 9.885-9.885.002-2.641-1.026-5.124-2.893-6.994-1.868-1.868-4.35-2.896-6.991-2.897-5.451 0-9.887 4.434-9.889 9.884-.001 2.125.65 4.148 1.671 5.864l-.999 3.649 3.824-1.213z"/></svg>
+                        Telepon WhatsApp
+                      </a>
+                      <a href="https://wa.me/6287841542664?text=Halo%20Relawan%20PRABU%20(Pak%20Rudi),%20saya%20ingin%20melaporkan%20kejadian%20darurat:" target="_blank" rel="noopener" class="prabu-btn-action prabu-btn-chat">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        Lapor Kejadian WA
+                      </a>
+                    </div>
+                  </div>
+
+                  <!-- Kontak 2: Pak Saryono -->
+                  <div class="prabu-person-card">
+                    <div class="prabu-person-top">
+                      <div class="prabu-person-avatar">S</div>
+                      <div class="prabu-person-meta">
+                        <div class="prabu-person-name">Saryono</div>
+                        <div class="prabu-person-role">Kontak Relawan PRABU</div>
+                        <div class="prabu-person-phone">0852-9232-3230</div>
+                      </div>
+                    </div>
+                    <div class="prabu-person-actions">
+                      <a href="https://wa.me/6285292323230" target="_blank" rel="noopener" class="prabu-btn-action prabu-btn-wa">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.59-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.882-4.434 9.885-9.885.002-2.641-1.026-5.124-2.893-6.994-1.868-1.868-4.35-2.896-6.991-2.897-5.451 0-9.887 4.434-9.889 9.884-.001 2.125.65 4.148 1.671 5.864l-.999 3.649 3.824-1.213z"/></svg>
+                        Telepon WhatsApp
+                      </a>
+                      <a href="https://wa.me/6285292323230?text=Halo%20Relawan%20PRABU%20(Pak%20Saryono),%20saya%20ingin%20melaporkan%20kejadian%20darurat:" target="_blank" rel="noopener" class="prabu-btn-action prabu-btn-chat">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        Lapor Kejadian WA
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Media Sosial Resmi Instagram -->
+              <div class="prabu-ig-banner">
+                <div class="prabu-ig-left">
+                  <div class="prabu-ig-icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  </div>
+                  <div>
+                    <h5 class="prabu-ig-title">Media Sosial Resmi Relawan PRABU</h5>
+                    <p class="prabu-ig-desc">Ikuti info kegiatan, dokumentasi bakti sosial, dan edukasi kebencanaan di Pracimantoro</p>
+                  </div>
+                </div>
+                <a href="https://www.instagram.com/prabu_pracimantoro_bersatu/" target="_blank" rel="noopener noreferrer" class="prabu-ig-btn">
+                  @prabu_pracimantoro_bersatu
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+
+              <!-- Catatan Layanan & Himbauan Instansi Terkait -->
+              <div class="prabu-disclaimer-box">
+                <div class="prabu-disclaimer-icon">⚠️</div>
+                <div class="prabu-disclaimer-body">
+                  <h5 class="prabu-disclaimer-title">Catatan Layanan &amp; Koordinasi Lapangan:</h5>
+                  <p class="prabu-disclaimer-p">
+                    Relawan PRABU merupakan unsur pendukung dan komunitas kerelawanan masyarakat di lapangan. Untuk keadaan darurat yang membutuhkan penanganan khusus, tindakan medis tingkat lanjut, pemadaman api skala besar, penegakan hukum, atau kewenangan resmi pemerintah, masyarakat disarankan menghubungi instansi terkait secara langsung:
+                  </p>
+                  <div class="prabu-instansi-tags">
+                    <span class="prabu-instansi-badge"><strong>Polri:</strong> 110</span>
+                    <span class="prabu-instansi-badge"><strong>Damkar:</strong> Pemadam Kebakaran</span>
+                    <span class="prabu-instansi-badge"><strong>BPBD:</strong> Kebencanaan Daerah</span>
+                    <span class="prabu-instansi-badge"><strong>SAR:</strong> Pencarian &amp; Evakuasi</span>
+                    <span class="prabu-instansi-badge"><strong>PMI:</strong> Medis Darurat &amp; Darah</span>
+                    <span class="prabu-instansi-badge"><strong>Puskesmas:</strong> Layanan Kesehatan 1</span>
+                  </div>
+                  <p class="prabu-disclaimer-sub">PRABU siap bersinergi dan bergotong-royong bersama instansi resmi demi keselamatan warga Pracimantoro.</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div><!-- end #panel-topic-prabu -->
+
         </div><!-- end .container -->
+
+          
+
       </main><!-- end #info-main-content -->
 
       <!-- FOOTER Informasi -->
@@ -2985,13 +3331,75 @@
             </p>
             <div class="footer-divider-simple"></div>
             <p class="footer-copyright-text">
-              &copy; 2026 PRACI SIAGA &middot; Hak Cipta Dilindungi &middot; TEGAR.S.A
+              &copy; 2026 PRACI SIAGA &middot; Hak Cipta Dilindungi &middot; TegarSetya.A
             </p>
           </div>
         </div>
       </footer>
 
     </div><!-- end #screen-informasi -->
+
+    <!-- ===================== FAB: TOMBOL WA Help Center (GLOBAL FIXED) ===================== -->
+    <button
+      class="fab-wa-servis"
+      id="fab-wa-servis"
+      onclick="openFabWaServis()"
+      aria-label="Chat WhatsApp Help Center PRACI SIAGA - 08895643235"
+      title="WA Help Center PRACI SIAGA"
+    >
+      <span class="fab-wa-label">WA Help Center<br>PRACI SIAGA</span>
+      <span class="fab-wa-circle">
+        <img src="assets/cs-service.png" alt="Help Center" class="fab-wa-img" />
+        <span class="fab-wa-badge" aria-hidden="true">!</span>
+      </span>
+    </button>
+
+    <!-- ===================== MODAL KONFIRMASI WA HELP CENTER ===================== -->
+    <div class="modal-overlay" id="helpcenter-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="helpcenter-modal-title">
+      <div class="modal-box helpcenter-modal-box" role="document">
+        <div class="helpcenter-modal-top">
+          <div class="helpcenter-avatar-wrap">
+            <img src="assets/cs-service.png" alt="Help Center" class="helpcenter-avatar-img" />
+            <span class="helpcenter-avatar-badge" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+              </svg>
+            </span>
+          </div>
+          <button class="modal-close helpcenter-modal-close" onclick="closeHelpcenterModal()" aria-label="Tutup dialog konfirmasi">✕</button>
+        </div>
+
+        <div class="helpcenter-modal-header-text">
+          <span class="helpcenter-badge-chip">Pusat Bantuan Resmi</span>
+          <h3 id="helpcenter-modal-title">Hubungi Help Center?</h3>
+          <p class="helpcenter-modal-desc">
+            Anda akan terhubung ke <strong>Help Center PRACI SIAGA</strong> melalui WhatsApp untuk konsultasi atau bantuan seputar aplikasi dan layanan darurat.
+          </p>
+        </div>
+
+        <div class="helpcenter-info-card">
+          <div class="helpcenter-info-row">
+            <span class="helpcenter-info-label">Tujuan Kontak</span>
+            <div class="helpcenter-info-value">
+              <strong>Help Center PRACI SIAGA</strong>
+              <span class="helpcenter-phone-num">0889 5643 235</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="helpcenter-modal-actions">
+          <button type="button" class="btn-helpcenter-cancel" onclick="closeHelpcenterModal()">
+            Batal
+          </button>
+          <button type="button" class="btn-helpcenter-confirm" id="btn-helpcenter-confirm" onclick="confirmHelpcenterWA()">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            </svg>
+            Buka WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- ===================== IMAGE PREVIEW MODAL (LIGHTBOX) ===================== -->
     <div class="modal-overlay" id="img-preview-modal" role="dialog" aria-modal="true" aria-labelledby="img-preview-title">
@@ -3013,14 +3421,59 @@
     </div>
 
     <!-- ===================== SCRIPTS ===================== -->
-    <script src="js/data.js"></script>
-    <script src="js/app.js?v=11"></script>
+    <script src="js/data.js?v=32"></script>
+    <script src="js/app.js?v=32"></script>
     <script>
       // ============================================================
       // NAVIGASI MULTI-LAYAR
       // ============================================================
 
       const SCREENS = ['welcome-screen', 'screen-telepon', 'screen-informasi'];
+
+      // Screen yang menampilkan FAB WA Help Center
+      const FAB_SCREENS = ['screen-telepon', 'screen-informasi'];
+
+      function updateFabVisibility(targetId) {
+        const fab = document.getElementById('fab-wa-servis');
+        if (!fab) return;
+        if (FAB_SCREENS.includes(targetId)) {
+          fab.classList.add('fab-visible');
+        } else {
+          fab.classList.remove('fab-visible');
+        }
+      }
+
+      /** Buka Modal Konfirmasi WA Help Center */
+      function openFabWaServis() {
+        if (typeof playTingTing === 'function') {
+          playTingTing();
+        } else if (typeof playTing === 'function') {
+          playTing();
+        } else if (typeof playCallTung === 'function') {
+          playCallTung();
+        }
+        openHelpcenterModal();
+      }
+
+      function openHelpcenterModal() {
+        const modal = document.getElementById('helpcenter-confirm-modal');
+        if (!modal) return;
+        modal.classList.add('modal-visible');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeHelpcenterModal() {
+        const modal = document.getElementById('helpcenter-confirm-modal');
+        if (!modal) return;
+        modal.classList.remove('modal-visible');
+        document.body.style.overflow = '';
+      }
+
+      function confirmHelpcenterWA() {
+        closeHelpcenterModal();
+        const msg = 'Halo, saya ingin menghubungi Help Center PRACI SIAGA. Mohon bantuannya!';
+        window.open('https://wa.me/628895643235?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      }
 
       function showScreen(targetId, fromId, direction) {
         const from = fromId ? document.getElementById(fromId) : null;
@@ -3046,41 +3499,127 @@
           window.scrollTo({ top: 0, behavior: 'instant' });
           setTimeout(() => to.classList.remove(inClass), 400);
         }
+
+        // Update FAB visibility after transition
+        setTimeout(() => updateFabVisibility(targetId), 380);
       }
 
       function getActiveScreen() {
         return SCREENS.find(id => !document.getElementById(id).classList.contains('hidden'));
       }
 
+      /** Menggulirkan halaman informasi penting langsung ke puncak teratas */
+      function scrollToTopOfInformasi() {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        if (document.documentElement) document.documentElement.scrollTop = 0;
+        if (document.body) document.body.scrollTop = 0;
+        const screenInfo = document.getElementById('screen-informasi');
+        if (screenInfo) screenInfo.scrollTop = 0;
+        const infoMain = document.getElementById('info-main-content');
+        if (infoMain) infoMain.scrollTop = 0;
+        const heroInfo = document.querySelector('.info-hero');
+        if (heroInfo) heroInfo.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
+
       /** Dari welcome → telepon atau informasi */
-      function navigateToApp(target) {
+      function navigateToApp(target, skipHistory) {
         const active = getActiveScreen();
+        if (!skipHistory && window.history && window.history.pushState) {
+          window.history.pushState({ screen: target }, '', '#' + target);
+        }
         if (target === 'telepon') {
+          if (typeof playTingTung === 'function') {
+            playTingTung();
+          }
           showScreen('screen-telepon', active, 'left');
           setTimeout(() => {
             const el = document.getElementById('services-section');
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 800);
         } else if (target === 'informasi') {
+          scrollToTopOfInformasi();
           showScreen('screen-informasi', active, 'left');
+          setTimeout(scrollToTopOfInformasi, 50);
+          setTimeout(scrollToTopOfInformasi, 360);
+          setTimeout(scrollToTopOfInformasi, 450);
         }
       }
 
       /** Dari telepon screen → informasi screen */
-      function goToInformasi() {
+      function goToInformasi(skipHistory) {
+        if (!skipHistory && window.history && window.history.pushState) {
+          window.history.pushState({ screen: 'informasi' }, '', '#informasi');
+        }
+        scrollToTopOfInformasi();
         showScreen('screen-informasi', 'screen-telepon', 'left');
+        setTimeout(scrollToTopOfInformasi, 50);
+        setTimeout(scrollToTopOfInformasi, 360);
+        setTimeout(scrollToTopOfInformasi, 450);
       }
 
       /** Dari informasi screen → telepon screen */
-      function goToTelepon() {
+      function goToTelepon(skipHistory) {
+        if (!skipHistory && window.history && window.history.pushState) {
+          window.history.pushState({ screen: 'telepon' }, '', '#telepon');
+        }
         showScreen('screen-telepon', 'screen-informasi', 'right');
       }
 
       /** Kembali ke welcome screen */
-      function backToWelcome() {
+      function backToWelcome(updateHistory = true) {
         const active = getActiveScreen();
+        if (active === 'welcome-screen') return;
         showScreen('welcome-screen', active, 'right');
+        if (updateHistory && window.history && window.history.pushState) {
+          if (window.location.hash) {
+            window.history.pushState({ screen: 'welcome' }, '', window.location.pathname);
+          }
+        }
       }
+
+      /** Handler khusus untuk tombol navigasi kembali di ponsel */
+      window.handleAndroidBackPressed = function() {
+        // 1. Tutup modal Help Center jika sedang terbuka
+        const helpModal = document.getElementById('helpcenter-confirm-modal');
+        if (helpModal && helpModal.classList.contains('modal-visible')) {
+          closeHelpcenterModal();
+          return true;
+        }
+
+        // 2. Tutup modal WhatsApp jika sedang terbuka
+        const waModal = document.getElementById('wa-modal');
+        if (waModal && (waModal.classList.contains('open') || waModal.classList.contains('modal-visible') || waModal.style.display === 'flex' || waModal.style.display === 'block')) {
+          if (typeof closeWhatsAppModal === 'function') {
+            closeWhatsAppModal();
+            return true;
+          }
+        }
+
+        // 3. Jika sedang di layar telepon atau informasi, kembali ke beranda
+        const active = getActiveScreen();
+        if (active && active !== 'welcome-screen') {
+          backToWelcome(true);
+          return true;
+        }
+
+        // 4. Jika sudah di beranda, kembalikan false agar Android dapat keluar aplikasi
+        return false;
+      };
+
+      // Dengarkan event popstate (tombol back browser)
+      window.addEventListener('popstate', (e) => {
+        const state = e.state;
+        const active = getActiveScreen();
+        if (state && state.screen === 'telepon') {
+          if (active !== 'screen-telepon') showScreen('screen-telepon', active, 'right');
+        } else if (state && state.screen === 'informasi') {
+          if (active !== 'screen-informasi') showScreen('screen-informasi', active, 'right');
+        } else {
+          if (active !== 'welcome-screen') {
+            backToWelcome(false);
+          }
+        }
+      });
 
       // Daftarkan Service Worker untuk PWA & Offline Support
       if ('serviceWorker' in navigator) {
